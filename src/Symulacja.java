@@ -20,7 +20,7 @@ public class Symulacja {
             for(int i = number_of_ants; i > 0; i++){
                 //runs simulation of every ant, from last to first
             }
-            //if every ant simulation return true -> simulation ends
+            // if every ant simulation return true -> simulation ends
             
         }
     }
