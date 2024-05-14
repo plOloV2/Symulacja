@@ -1,22 +1,22 @@
 public class Point {
 
-    private short x_position;
-    private short y_position;
+    private int x_position;
+    private int y_position;
 
-    public Point(short x, short y){
+    public Point(int x, int y){
         this.x_position = x;
         this.y_position = y;
     }
 
-    public short X_pos(){
+    public int X_pos(){
         return x_position;
     }
 
-    public short Y_pos(){
+    public int Y_pos(){
         return y_position;
     }
 
-    public void change_coordinates(short x, short y){
+    public void change_coordinates(int x, int y){
         this.x_position += x;
         this.y_position += y;
     }

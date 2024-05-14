@@ -1,4 +1,4 @@
-public abstract class Ant {
+public class Ant {
     //po niej bedą dziedziczyć robotnice i lider
     Point position;
 
