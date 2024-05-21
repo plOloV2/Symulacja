@@ -16,14 +16,14 @@ public class SimulationEngine extends JPanel implements ActionListener {
     int number_of_ants;         //holds current number of ants
     short board_size;           //min 100, max 1000
     int tick = 0;               //counts how smany ticks passed since last ant was created
-    int leader_angle;            //describes max angle or leaders path change
+    int leader_angle;           //describes max angle or leaders path change
     boolean end = false;        //ends simulation
     Point anthill;              //for user to decide position
     Point food_source;          //for user to decide position
     
 
     //objects
-    Ant_lider antLeader = new Ant_lider(anthill);
+    Ant_lider antLeader = new Ant_lider(anthill, leader_angle);
 
     // simulation logic
     Timer gameloop;
@@ -41,7 +41,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.tick = tick;
         this.leader_angle = leader_angle;
 
-        gameloop = new Timer(1000/tick+1, this);
+        gameloop = new Timer(1000-tick, this);
     }
 
     

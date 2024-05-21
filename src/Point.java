@@ -20,4 +20,9 @@ public class Point {
         this.x_position += x;
         this.y_position += y;
     }
+
+    public void new_coordinates(int x, int y){
+        this.x_position = x;
+        this.y_position = y;
+    }
 }
