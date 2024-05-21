@@ -25,7 +25,7 @@ public class Ant_lider extends Ant{
 
         result = (a+b)/(c*d);
 
-        if(Math.acos(result) <= (180.0/(double)leader_angle))
+        if(Math.acos(result) <= ((double)leader_angle/180.0))
             return true;
 
         return false;
