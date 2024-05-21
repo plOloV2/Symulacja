@@ -3,9 +3,9 @@ import java.util.Random;
 public class Ant_lider extends Ant{
 
     // randomizer 
-    Random random = new Random();
-    int leader_angle;
-    Point last_direction = new Point(0, 0);
+    private Random random = new Random();
+    private int leader_angle;
+    private Point last_direction = new Point(0, 0);
     
 
     
@@ -62,6 +62,5 @@ public class Ant_lider extends Ant{
         this.position.change_coordinates((short)x, (short)y);
 
         return false;
-
     }
 }

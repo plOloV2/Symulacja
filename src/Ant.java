@@ -1,6 +1,6 @@
 public class Ant {
     //po niej bedą dziedziczyć robotnice i lider
-    Point position;
+    protected Point position;
 
     public Ant(Point start){
         this.position = start;
