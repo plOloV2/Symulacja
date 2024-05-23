@@ -3,6 +3,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -12,18 +13,18 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private int boardHeight;
     private int boardWidth;
 
-    private short max_number_of_ants;   //min 10
-    private int number_of_ants;         //holds current number of ants
+    private int max_number_of_ants;   //min 10
     private int tick = 0;               //counts how smany ticks passed since last ant was created
     private int leader_angle;           //describes max angle or leaders path change
-    private boolean end = false;        //ends simulation
     private Point anthill;              //for user to decide position
     private Point food_source;          //for user to decide position
     
 
     //objects
-    private Ant_leader antLeader = new Ant_leader(anthill, leader_angle);
-    private Obstackle terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, number_of_ants, 10, 5);
+    private Ant_leader antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardHeight);
+    private Obstackle terrain;
+    // terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 5, 10, 5);
+    private ArrayList<Ant_worker> workers;
 
     // simulation logic
     Timer gameloop;
@@ -37,7 +38,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         setBackground(Color.BLACK);
         anthill= new Point(20,250);   
         food_source = new Point(420, 250);
-        this.number_of_ants = number_of_ants;
+        this.max_number_of_ants = number_of_ants;
         this.tick = tick;
         this.leader_angle = leader_angle;
 

@@ -6,12 +6,16 @@ public class Ant_leader extends Ant{
     private Random random = new Random();
     private int leader_angle;
     private Point last_direction = new Point(0, 0);
+    private int boardHeight;
+    private int boardWidth;
     
 
     
-    public Ant_leader(Point start, int leader_angle_value){
+    public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
         super(start);
         this.leader_angle = leader_angle_value;
+        this.boardHeight = boardHeight;
+        this.boardWidth = boardWidth;
     }
     
     private boolean angle_check(int x, int y){
@@ -48,8 +52,8 @@ public class Ant_leader extends Ant{
         else{
             do{
 
-                x = random.nextInt(500) - this.position.X_pos();
-                y = random.nextInt(500) - this.position.Y_pos();
+                x = random.nextInt(boardWidth) - this.position.X_pos();
+                y = random.nextInt(boardHeight) - this.position.Y_pos();
 
             }while(angle_check(x, y));
         }

@@ -76,6 +76,7 @@ public class Symulacja {
         leader_angle = getSliderValue(sliderLeadAngle,text3);
 
     }
+
     int tick;
     int number_of_ants;
     int leader_angle;
@@ -93,13 +94,13 @@ public class Symulacja {
 
     
     JSlider sliderTicks = new JSlider(JSlider.HORIZONTAL, 0, 1000, 500);
-    JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 0, 100, 50);
-    JSlider sliderLeadAngle = new JSlider(JSlider.HORIZONTAL, 0, 90, 45);
+    JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 10, 100, 45);
+    JSlider sliderLeadAngle = new JSlider(JSlider.HORIZONTAL, 15, 90, 60);
 
 
     JLabel text1 = new JLabel("500");
-    JLabel text2 = new JLabel("50");
-    JLabel text3 = new JLabel("45");
+    JLabel text2 = new JLabel("45");
+    JLabel text3 = new JLabel("60");
 
     JLabel name1 = new JLabel("Ticks");
     JLabel name2 = new JLabel("num. of ants");
