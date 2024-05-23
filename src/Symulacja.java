@@ -10,8 +10,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Symulacja {
-    int boardHeight = 500;
-    int boardWidth = 500;
+    int boardHeight = 1000;
+    int boardWidth = 1000;
     Symulacja(){
         
         initComponents();

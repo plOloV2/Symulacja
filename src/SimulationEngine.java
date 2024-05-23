@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -13,15 +14,18 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private int boardHeight;
     private int boardWidth;
 
-    private int max_number_of_ants;   //min 10
+    private int max_number_of_ants;     //min 10
+    private boolean end = false;        //ends simulation
     private int tick = 0;               //counts how smany ticks passed since last ant was created
     private int leader_angle;           //describes max angle or leaders path change
     private Point anthill;              //for user to decide position
     private Point food_source;          //for user to decide position
+    private Random random = new Random();
     
 
     //objects
-    private Ant_leader antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardHeight);
+    private Ant_leader antLeader;
+    // antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardHeight);
     private Obstackle terrain;
     // terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 5, 10, 5);
     private ArrayList<Ant_worker> workers;
@@ -36,8 +40,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
-        anthill= new Point(20,250);   
-        food_source = new Point(420, 250);
+        anthill= new Point(40,500);   
+        food_source = new Point(900, 500);
         this.max_number_of_ants = number_of_ants;
         this.tick = tick;
         this.leader_angle = leader_angle;
@@ -68,7 +72,26 @@ public class SimulationEngine extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        antLeader.symulate(food_source);
+        
+        if(tick == 3){
+            if(workers.size() < max_number_of_ants)
+                workers.add(new Ant_worker(anthill));
+            
+            tick = 1;
+        }
+        else 
+            tick ++;
+
+        end = antLeader.symulate(food_source);
+
+        if(workers.size() > 0)
+            end = workers.get(0).symulate(food_source, antLeader.current_position());
+
+        for(int i = 1; i < workers.size(); i++)
+            end = workers.get(i).symulate(food_source, workers.get(i-1).current_position());
+        
+            
+        //if (!end) koniec symulacji
     }
 
 }
