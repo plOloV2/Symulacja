@@ -1,6 +1,6 @@
 import java.util.Random;
 
-public class Ant_lider extends Ant{
+public class Ant_leader extends Ant{
 
     // randomizer 
     private Random random = new Random();
@@ -9,7 +9,7 @@ public class Ant_lider extends Ant{
     
 
     
-    public Ant_lider(Point start, int leader_angle_value){
+    public Ant_leader(Point start, int leader_angle_value){
         super(start);
         this.leader_angle = leader_angle_value;
     }

@@ -14,12 +14,44 @@ public class Obstackle {
             int x = random.nextInt(boardWidth);
             int y = random.nextInt(boardHeight);
 
-            if(distance(x, y, food_source) <= 5 || distance(x, y, anthill) <= 5 || check_if_already_occupied(x, y)){
+            if(distance(x, y, food_source) <= 5 || distance(x, y, anthill) <= 5 || proximity_check(x, y)){
                 i--;
                 continue;
             }
 
+            occupied.add(new Point(x, y));
+            int size = random.nextInt(max_size_of_obstackle - min_size_of_obstackle) + min_size_of_obstackle;
+            
+            for(int j = 0; j < size; j++){
 
+                x = occupied.get(occupied.size()-1).X_pos();
+                y = occupied.get(occupied.size()-1).Y_pos();
+
+                x += random.nextInt(2) - 1;
+                y += random.nextInt(2) - 1;
+
+                if(x > boardWidth)
+                    x = boardWidth;
+
+                if(x < 0)
+                    x = 0;
+                
+                if(y > boardHeight)
+                    y = boardHeight;
+                
+                if(y > 0)
+                    y = 0;
+
+                if(check_position(new Point(x, y)))
+                    occupied.add(new Point(x, y));
+
+                else{
+                    i--;
+                    continue;
+                }
+
+            }
+            
         }
 
     }
@@ -32,7 +64,21 @@ public class Obstackle {
         return (double)Math.sqrt(x*x+y*y);
     }
 
-    private boolean check_if_already_occupied(int x, int y){
+    private boolean proximity_check(int x, int y){
+
+        for(int i = 0; i < occupied.size(); i++)
+            if(distance(x, y, occupied.get(i)) <= 10)
+                return false;
+
+        return true;
+    }
+
+    public boolean check_position(Point position){
+
+        for(int i = 0; i < occupied.size(); i++)
+            if(occupied.get(i) == position)
+                return false;
+
         return true;
     }
 }

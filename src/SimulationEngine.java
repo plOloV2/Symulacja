@@ -22,7 +22,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
     
 
     //objects
-    private Ant_lider antLeader = new Ant_lider(anthill, leader_angle);
+    private Ant_leader antLeader = new Ant_leader(anthill, leader_angle);
+    private Obstackle terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, number_of_ants, 10, 5);
 
     // simulation logic
     Timer gameloop;
