@@ -3,7 +3,7 @@ import java.util.Random;
 
 public class Obstackle {
 
-    private ArrayList<Point> occupied;
+    private ArrayList<Point> occupied;              //list of all spots on board that are covered by some obstackle
     private Random random = new Random();
 
 
@@ -11,26 +11,27 @@ public class Obstackle {
         
         for(int i = 0; i < number_of_obstakles; i++){
 
-            int x = random.nextInt(boardWidth);
+            int x = random.nextInt(boardWidth);                                                                     //picks randome position for obstackle
             int y = random.nextInt(boardHeight);
 
-            if(distance(x, y, food_source) <= 5 || distance(x, y, anthill) <= 5 || proximity_check(x, y)){
+            if(distance(x, y, food_source) <= 5 || distance(x, y, anthill) <= 5 || proximity_check(x, y, 10)){          //checks if this position is not too close to other obstackles, anthill or food source
                 i--;
                 continue;
             }
 
-            occupied.add(new Point(x, y));
-            int size = random.nextInt(max_size_of_obstackle - min_size_of_obstackle) + min_size_of_obstackle;
+            occupied.add(new Point(x, y));                                                                          //if its not, marks given point as blocked
+
+            int size = random.nextInt(max_size_of_obstackle - min_size_of_obstackle) + min_size_of_obstackle;       //randomly picks how many neighboring points should be blocked
             
             for(int j = 0; j < size; j++){
 
-                x = occupied.get(occupied.size()-1).X_pos();
+                x = occupied.get(occupied.size()-1).X_pos();                                                        //takes last obstackle position
                 y = occupied.get(occupied.size()-1).Y_pos();
 
-                x += random.nextInt(2) - 1;
+                x += random.nextInt(2) - 1;                                                                         //changes its x and y values by -1, 0 or 1
                 y += random.nextInt(2) - 1;
 
-                if(x > boardWidth)
+                if(x > boardWidth)                                                                                  //checks if x and y is not out of boundaries
                     x = boardWidth;
 
                 if(x < 0)
@@ -42,10 +43,10 @@ public class Obstackle {
                 if(y > 0)
                     y = 0;
 
-                if(check_position(new Point(x, y)))
+                if(check_position(new Point(x, y)))                                                                 //checks if given point is not yet occupied
                     occupied.add(new Point(x, y));
 
-                else{
+                else{                                                                                               //if poit is occupied, subtracks 1 from iterator and repeates cycle
                     i--;
                     continue;
                 }
@@ -56,7 +57,7 @@ public class Obstackle {
 
     }
 
-    private double distance(int x, int y, Point target){
+    private double distance(int x, int y, Point target){                //returns distance beetwen given point and x,y coordinates
 
         x -= target.X_pos();
         y -= target.Y_pos();
@@ -64,16 +65,16 @@ public class Obstackle {
         return (double)Math.sqrt(x*x+y*y);
     }
 
-    private boolean proximity_check(int x, int y){
+    private boolean proximity_check(int x, int y, int distance){       //checks distance beetwen given point and x,y coordinates
 
         for(int i = 0; i < occupied.size(); i++)
-            if(distance(x, y, occupied.get(i)) <= 10)
+            if(distance(x, y, occupied.get(i)) <= distance)
                 return false;
 
         return true;
     }
 
-    public boolean check_position(Point position){
+    public boolean check_position(Point position){                    //checks if given point is occupied or not
 
         for(int i = 0; i < occupied.size(); i++)
             if(occupied.get(i) == position)

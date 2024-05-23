@@ -4,9 +4,9 @@ public class Ant_leader extends Ant{
 
     // randomizer 
     private Random random = new Random();
-    private int leader_angle;
-    private Point last_direction = new Point(0, 0);
-    private int boardHeight;
+    private int leader_angle;                                   //angle at whitch leader can change direction
+    private Point last_direction = new Point(0, 0);         //previouse leader direction
+    private int boardHeight;                                    //board boudaries
     private int boardWidth;
     
 
@@ -18,7 +18,7 @@ public class Ant_leader extends Ant{
         this.boardWidth = boardWidth;
     }
     
-    private boolean angle_check(int x, int y){
+    private boolean angle_check(int x, int y){                      //this function checks if provided vector(x,y) makes smaller angle beetwen last_direction vector than leader_angle
         double a, b, c, d, result;
 
         a = (double)x * (double)last_direction.X_pos();
@@ -35,22 +35,22 @@ public class Ant_leader extends Ant{
         return false;
     }
 
-    public boolean symulate(Point end){
+    public boolean simulate(Point end){                                             //simulates ant movement, return true if ant has reached food source
         
-        if(this.position  == end)
+        if(this.position  == end)                                           //checks if ant is at food source position
             return true;
 
         int x, y;
         
-        if(last_direction.X_pos() == 0 && last_direction.Y_pos() == 0){
+        if(last_direction.X_pos() == 0 && last_direction.Y_pos() == 0){     //cheks if leader is yet to move
 
-            x = end.X_pos() - this.position.X_pos();
+            x = end.X_pos() - this.position.X_pos();                        //if leader has not yet moved, first move will be in direction of food source
             y = end.Y_pos() - this.position.Y_pos();
 
             last_direction.new_coordinates(x, y);
         }
         else{
-            do{
+            do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
                 x = random.nextInt(boardWidth) - this.position.X_pos();
                 y = random.nextInt(boardHeight) - this.position.Y_pos();
@@ -58,12 +58,12 @@ public class Ant_leader extends Ant{
             }while(angle_check(x, y));
         }
        
-        float distance = (float)Math.sqrt(x*x+y*y);
+        float distance = (float)Math.sqrt(x*x+y*y);                         //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (2 / distance));
+        x = Math.round(x * (2 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
         y = Math.round(y * (2 / distance));
 
-        this.position.change_coordinates((short)x, (short)y);
+        this.position.change_coordinates((short)x, (short)y);               //changes its position
 
         return false;
     }

@@ -1,12 +1,11 @@
 public class Ant {
-    //po niej bedą dziedziczyć robotnice i lider
-    protected Point position;
+    protected Point position;               //current position of ant
 
     public Ant(Point start){
         this.position = start;
     }
 
-    public Point current_position(){
+    public Point current_position(){        //return currnet position
         return position;
     }
 }

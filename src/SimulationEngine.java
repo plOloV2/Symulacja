@@ -82,13 +82,13 @@ public class SimulationEngine extends JPanel implements ActionListener {
         else 
             tick ++;
 
-        end = antLeader.symulate(food_source);
+        end = antLeader.simulate(food_source);
 
         if(workers.size() > 0)
-            end = workers.get(0).symulate(food_source, antLeader.current_position());
+            end = workers.get(0).simulate(food_source, antLeader.current_position());
 
         for(int i = 1; i < workers.size(); i++)
-            end = workers.get(i).symulate(food_source, workers.get(i-1).current_position());
+            end = workers.get(i).simulate(food_source, workers.get(i-1).current_position());
         
             
         //if (!end) koniec symulacji
