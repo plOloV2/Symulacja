@@ -25,6 +25,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private Point anthill;              //for user to decide position
     private Point food_source;          //for user to decide position
     private Random random = new Random();
+    private int tX;
+    private int tY;
     
 
     //objects
@@ -36,21 +38,21 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     // simulation logic
     Timer gameloop;
-    
 
 
-    SimulationEngine(int boardWidth, int boardHeight, int tick, int number_of_ants, int leader_angle, int antHillX, int antHillY, int foodSourceX,int foodSourceY){
+    SimulationEngine(int boardWidth, int boardHeight){
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
-        anthill= new Point(40,500);   
-        food_source = new Point(900, 500);
-        this.max_number_of_ants = number_of_ants;
-        this.tick = tick;
-        this.leader_angle = leader_angle;
+        anthill= new Point(40,400);   
+        food_source = new Point(400, 400);
+        //this.max_number_of_ants = number_of_ants;
+        //this.tick = tick;
+        //this.leader_angle = leader_angle;
 
         gameloop = new Timer(1000-tick, this);
+        gameloop.start();
     }
 
     
@@ -121,6 +123,31 @@ public class SimulationEngine extends JPanel implements ActionListener {
         
             
         //if (!end) koniec symulacji
+    }
+
+
+
+    public void get_tick(int tick){
+        this.tick = tick;
+    }
+    public void get_number_of_ants(int number_of_ants){
+        this.max_number_of_ants = number_of_ants;
+    }
+    public void get_leader_angle(int leader_angle){
+        this.leader_angle = leader_angle;
+    }
+    public void get_antHillX(int x){
+        anthill.give_X_pos(x);
+    }
+    public void get_antHillY(int y){
+        anthill.give_X_pos(y);
+    }
+    
+    public void get_foodSourceX(int x){
+        food_source.give_X_pos(x);
+    }
+    public void get_foodSourceY(int y){
+        food_source.give_Y_pos(y);
     }
 
 }

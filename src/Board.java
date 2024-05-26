@@ -16,10 +16,11 @@ import javax.swing.event.ChangeListener;
 
 public class Board extends JFrame{
 
-    Board(int boardHeight, int boardWidth,String nazwa){
+    Board(int boardHeight, int boardWidth, String nazwa, SimulationEngine simulationEngine){
         super(nazwa);
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
+        this.simulationEngine = simulationEngine;
         initComponents();
     }
 
@@ -29,7 +30,7 @@ public class Board extends JFrame{
         this.setSize(boardWidth, boardHeight+150);
         this.setResizable(false);
         this.setLayout(new BorderLayout());
-        
+        this.add(simulationEngine, BorderLayout.NORTH);
         this.add(panel, BorderLayout.SOUTH);
         this.setVisible(true);
 
@@ -126,19 +127,28 @@ public class Board extends JFrame{
                
             }
         });
+        simulationEngine.get_tick(tick);
+        simulationEngine.get_number_of_ants(number_of_ants);
+        simulationEngine.get_leader_angle(leader_angle);
+        simulationEngine.get_antHillX(antHillX);
+        simulationEngine.get_antHillY(antHillY);
+        simulationEngine.get_foodSourceX(foodSourceX);
+        simulationEngine.get_foodSourceY(foodSourceY);
     }
+
+    private SimulationEngine simulationEngine;
 
     private int boardHeight;
     private int boardWidth;
 
-    private Integer antHillX = 0;
+    private Integer antHillX = 1000;
     private Integer antHillY = 0;
-    private Integer foodSourceX = 0;
+    private Integer foodSourceX = 1000;
     private Integer foodSourceY = 0;
 
-    private int tick = 50;
-    private int number_of_ants = 50;
-    private int leader_angle = 50;
+    private int tick = 0;
+    private int number_of_ants = 0;
+    private int leader_angle = 0;
     
 
     private JButton button = new JButton("Start");
@@ -171,27 +181,6 @@ public class Board extends JFrame{
     private JLabel name3 = new JLabel("Leader wiggle angle");
 
 
-    public int return_tick(){
-        return tick;
-    }
-    public int return_number_of_ants(){
-        return number_of_ants;
-    }
-    public int return_leader_angle(){
-        return leader_angle;
-    }
-    public int return_antHillX(){
-        return antHillX;
-    }
-    public int return_antHillY(){
-        return antHillY;
-    }
-    public int return_foodSourceX(){
-        return foodSourceX;
-    }
-    public int return_foodSourceY(){
-        return foodSourceY;
-    }
 
 
     public static int getSliderValue(JSlider slider, JLabel text){
