@@ -3,7 +3,7 @@ import java.awt.BorderLayout;
 public class Symulacja {
     Symulacja(){
         frame = new Board(boardHeight, boardWidth, "symulacja");
-        simulationEngine = new SimulationEngine(boardWidth, boardHeight, frame.return_tick(), frame.return_number_of_ants(), frame.return_leader_angle());
+        simulationEngine = new SimulationEngine(boardWidth, boardHeight, frame.return_tick(), frame.return_number_of_ants(), frame.return_leader_angle(),frame.return_antHillX(),frame.return_antHillY(),frame.return_foodSourceX(),frame.return_foodSourceY());
         frame.add(simulationEngine, BorderLayout.NORTH);
     }
 
