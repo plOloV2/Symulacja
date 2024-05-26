@@ -44,8 +44,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
-        anthill= new Point(40,500);   
-        food_source = new Point(900, 500);
+        anthill= new Point(40,250);   
+        food_source = new Point(400, 250);
         this.max_number_of_ants = number_of_ants;
         this.tick = tick;
         this.leader_angle = leader_angle;
@@ -62,16 +62,19 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     private BufferedImage ant_hillImage;
     private BufferedImage food_sourceImage;
-    // try {
-    //     ant_hillImage = ImageIO.read(new File("ant.png"));
-    // } catch (IOException ez) {
-    //     System.out.println("Brak ant_hill.png");
-    // }
-    // try {
-    //     food_sourceImage = ImageIO.read(new File("ant.png"));
-    // } catch (IOException ew) {
-    //     System.out.println("Brak food_source.png");
-    // }
+
+    public void import_images(){
+        try {
+            ant_hillImage = ImageIO.read(new File("ant_hill.png"));
+        } catch (IOException ez) {
+            System.out.println("Brak ant_hill.png");
+        }
+        try {
+            food_sourceImage = ImageIO.read(new File("food_source.png"));
+        } catch (IOException ew) {
+            System.out.println("Brak food_source.png");
+        }
+    }
 
     int i = 0;
 
