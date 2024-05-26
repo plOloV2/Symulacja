@@ -14,7 +14,7 @@ public class Ant {
     public Ant(Point start){
         this.position = start;
         try {
-            antImage = ImageIO.read(new File("ant.png"));
+            antImage = ImageIO.read(new File("images/ant.png"));
         } catch (IOException ex) {
             System.out.println("Brak ant.png");
         }

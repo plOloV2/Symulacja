@@ -65,12 +65,12 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     public void import_images(){
         try {
-            ant_hillImage = ImageIO.read(new File("ant_hill.png"));
+            ant_hillImage = ImageIO.read(new File("images/ant_hill.png"));
         } catch (IOException ez) {
             System.out.println("Brak ant_hill.png");
         }
         try {
-            food_sourceImage = ImageIO.read(new File("food_source.png"));
+            food_sourceImage = ImageIO.read(new File("images/food_source.png"));
         } catch (IOException ew) {
             System.out.println("Brak food_source.png");
         }
