@@ -3,9 +3,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Random;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -40,8 +44,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
-        anthill= new Point(40,400);   
-        food_source = new Point(400, 400);
+        anthill= new Point(40,500);   
+        food_source = new Point(900, 500);
         this.max_number_of_ants = number_of_ants;
         this.tick = tick;
         this.leader_angle = leader_angle;
@@ -55,15 +59,34 @@ public class SimulationEngine extends JPanel implements ActionListener {
         draw(g);
     }
 
+
+    private BufferedImage ant_hillImage;
+    private BufferedImage food_sourceImage;
+
+    public void import_images(){
+        try {
+            ant_hillImage = ImageIO.read(new File("images/ant_hill.png"));
+        } catch (IOException ez) {
+            System.out.println("Brak ant_hill.png");
+        }
+        try {
+            food_sourceImage = ImageIO.read(new File("images/food_source.png"));
+        } catch (IOException ew) {
+            System.out.println("Brak food_source.png");
+        }
+    }
+
     int i = 0;
 
     public void draw(Graphics g){
-
+        if(i%2==0){
             g.setColor(new Color(102,51,0));
             g.fillOval(anthill.X_pos(), anthill.Y_pos(), 40, 40);
             g.setColor(new Color(0,204,0));
             g.fillOval(food_source.X_pos(), food_source.Y_pos(), 40, 40);
-            //antLeader.draw();
+            i++;
+        }
+        i++;
     }
 
 
