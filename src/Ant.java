@@ -23,4 +23,14 @@ public class Ant {
     public Point current_position(){        //return currnet position
         return position;
     }
+
+    public void draw(Graphics g){
+        if (antImage != null) {
+            g.drawImage(antImage, position.X_pos(), position.Y_pos(), null);
+        } else {
+            g.setColor(new Color(255, 0, 0));
+            g.fillOval(position.X_pos(), position.Y_pos(), 1, 1);
+        }
+    }
+
 }
