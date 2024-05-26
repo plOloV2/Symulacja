@@ -16,7 +16,7 @@ public class Ant {
         try {
             antImage = ImageIO.read(new File("ant.png"));
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println("Brak ant.png");
         }
     }
 
