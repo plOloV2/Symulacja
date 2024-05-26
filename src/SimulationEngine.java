@@ -35,13 +35,13 @@ public class SimulationEngine extends JPanel implements ActionListener {
     
 
 
-    SimulationEngine(int boardWidth, int boardHeight, int tick, int number_of_ants, int leader_angle){
+    SimulationEngine(int boardWidth, int boardHeight, int tick, int number_of_ants, int leader_angle, int antHillX, int antHillY, int foodSourceX,int foodSourceY){
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(Color.BLACK);
-        anthill= new Point(40,500);   
-        food_source = new Point(900, 500);
+        anthill= new Point(40,400);   
+        food_source = new Point(400, 400);
         this.max_number_of_ants = number_of_ants;
         this.tick = tick;
         this.leader_angle = leader_angle;
@@ -58,14 +58,12 @@ public class SimulationEngine extends JPanel implements ActionListener {
     int i = 0;
 
     public void draw(Graphics g){
-        if(i%2==0){
+
             g.setColor(new Color(102,51,0));
             g.fillOval(anthill.X_pos(), anthill.Y_pos(), 40, 40);
             g.setColor(new Color(0,204,0));
             g.fillOval(food_source.X_pos(), food_source.Y_pos(), 40, 40);
-            i++;
-        }
-        i++;
+            //antLeader.draw();
     }
 
 

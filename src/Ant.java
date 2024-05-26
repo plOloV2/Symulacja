@@ -8,4 +8,6 @@ public class Ant {
     public Point current_position(){        //return currnet position
         return position;
     }
+
+    
 }

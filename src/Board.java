@@ -15,8 +15,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 public class Board extends JFrame{
-    int boardHeight;
-    int boardWidth;
 
     Board(int boardHeight, int boardWidth,String nazwa){
         super(nazwa);
@@ -25,7 +23,7 @@ public class Board extends JFrame{
         initComponents();
     }
 
-    public void initComponents(){
+    private void initComponents(){
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(boardWidth, boardHeight+150);
@@ -34,7 +32,6 @@ public class Board extends JFrame{
         
         this.add(panel, BorderLayout.SOUTH);
         this.setVisible(true);
-
 
         panel.setLayout(new GridLayout(4,1));
         panel.add(panel0);
@@ -86,6 +83,12 @@ public class Board extends JFrame{
 
         //this.pack();
 
+        applyChanges();
+    }
+
+
+    private void applyChanges(){
+        
         tick = getSliderValue(sliderTicks,text1);
         number_of_ants = getSliderValue(sliderNumOfAnts,text2);
         leader_angle = getSliderValue(sliderLeadAngle,text3);
@@ -113,7 +116,7 @@ public class Board extends JFrame{
                     coordinatesFoodSourceY.setEnabled(false);
                 } catch (NumberFormatException ex) {
                     JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");
-                    
+
                     System.out.println("Niepoprawny format liczby "+coordinatesAntHillX.getText());
                     System.out.println("Niepoprawny format liczby "+coordinatesAntHillY.getText());
                     System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceX.getText());
@@ -123,8 +126,10 @@ public class Board extends JFrame{
                
             }
         });
-
     }
+
+    private int boardHeight;
+    private int boardWidth;
 
     private Integer antHillX;
     private Integer antHillY;
@@ -174,6 +179,18 @@ public class Board extends JFrame{
     }
     public int return_leader_angle(){
         return leader_angle;
+    }
+    public int return_antHillX(){
+        return antHillX;
+    }
+    public int return_antHillY(){
+        return antHillY;
+    }
+    public int return_foodSourceX(){
+        return foodSourceX;
+    }
+    public int return_foodSourceY(){
+        return foodSourceY;
     }
 
 
