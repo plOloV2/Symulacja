@@ -131,14 +131,14 @@ public class Board extends JFrame{
     private int boardHeight;
     private int boardWidth;
 
-    private Integer antHillX;
-    private Integer antHillY;
-    private Integer foodSourceX;
-    private Integer foodSourceY;
+    private Integer antHillX = 0;
+    private Integer antHillY = 0;
+    private Integer foodSourceX = 0;
+    private Integer foodSourceY = 0;
 
-    private int tick;
-    private int number_of_ants;
-    private int leader_angle;
+    private int tick = 50;
+    private int number_of_ants = 50;
+    private int leader_angle = 50;
     
 
     private JButton button = new JButton("Start");
