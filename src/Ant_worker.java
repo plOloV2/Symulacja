@@ -21,8 +21,8 @@ public class Ant_worker extends Ant{
             return true;
         }
 
-        x = Math.round(x * (5 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (5 / distance));
+        x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (4 / distance));
 
         this.position.change_coordinates((short)x, (short)y);               //changes its position
 

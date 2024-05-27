@@ -14,7 +14,7 @@ public class Ant_leader extends Ant{
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
         super(start);
-        this.leader_angle = leader_angle_value;
+        this.leader_angle = leader_angle_value/2;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         counter = 1;
@@ -42,16 +42,24 @@ public class Ant_leader extends Ant{
         if(this.position  == end)                                           //checks if ant is at food source position
             return true;
         
+        float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
+        
+        if(distance <= 3){
+            this.position.new_coordinates(end.X_pos(), end.Y_pos());
+            return true;
+        }
         counter++;
 
         int x, y;
         
-        if(counter == 5 || (last_direction.X_pos() == 0 && last_direction.Y_pos() == 0)){     //cheks if leader is yet to move
+        if(counter >= 3 || (last_direction.X_pos() == 0 && last_direction.Y_pos() == 0)){     //cheks if leader is yet to move
 
             x = end.X_pos() - this.position.X_pos();                        //if leader has not yet moved, first move will be in direction of food source
             y = end.Y_pos() - this.position.Y_pos();
 
             last_direction.new_coordinates(x, y);
+
+            counter = 0;
         }
         else{
             do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
@@ -62,10 +70,10 @@ public class Ant_leader extends Ant{
             }while(angle_check(x, y));
         }
        
-        float distance = (float)Math.sqrt(x*x+y*y);                         //calculates distance etwen its position and previos ant position
+        distance = (float)Math.sqrt(x*x+y*y);                               //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (5 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (5 / distance));
+        x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (4 / distance));
 
         this.position.change_coordinates(x, y);                             //changes its position
 
