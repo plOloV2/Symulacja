@@ -19,8 +19,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private boolean end = false;        //ends simulation
     private int tick = 0;               //counts how smany ticks passed since last ant was created
     private int leader_angle;           //describes max angle or leaders path change
-    private Point anthill;              //for user to decide position
-    private Point anthillCpy;              //for user to decide position
+    private Point anthill;              //for user to decide position          //for user to decide position
     private Point food_source;          //for user to decide position
     private Random random = new Random();
     private int tX;
@@ -48,9 +47,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(new Color(0,102,0));
-        anthill= new Point(-100,0);   
-        food_source = new Point(-100, 0);
-        antLeader = new Ant_leader(anthillCpy, leader_angle, boardHeight, boardWidth);
+        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
 
         import_images();
 
@@ -70,7 +67,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
                 ant_hillImage = new ImageIcon("images/ant_hill.png").getImage();
                 food_sourceImage = new ImageIcon("images/food_source.png").getImage();
             } catch (Exception ex) {
-                System.out.println("Image didnt load");
+                System.out.println("image didnt load");
             }
 
     }
@@ -150,20 +147,18 @@ public class SimulationEngine extends JPanel implements ActionListener {
     public void set_leader_angle(int leader_angle){
         this.leader_angle = leader_angle;
     }
-    public void set_antHillX(int x){
-        anthill.give_X_pos(x);
-        anthillCpy.give_X_pos(x);
-        
+    public void set_antHill(int x, int y){
+        anthill = new Point(x, y);
+        antLeader = new Ant_leader(anthill, y, x, y)
     }
-    public void set_antHillY(int y){
-        anthill.give_Y_pos(y);
-        anthillCpy.give_Y_pos(y);
+    // public void set_antHillY(int y){
+    //     anthill.give_Y_pos(y);
+    // }
+    public void set_foodSource(int x, int y){
+        food_source = new Point(x,y);
     }
-    public void set_foodSourceX(int x){
-        food_source.give_X_pos(x);
-    }
-    public void set_foodSourceY(int y){
-        food_source.give_Y_pos(y);
-    }
+    // public void set_foodSourceY(int y){
+    //     food_source.give_Y_pos(y);
+    // }
 
 }

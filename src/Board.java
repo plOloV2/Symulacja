@@ -113,10 +113,8 @@ public class Board extends JFrame{
                             System.out.println("Wartość int: " + foodSourceY);
                             simulationEngine.set_number_of_ants(number_of_ants);
                             simulationEngine.set_leader_angle(leader_angle);
-                            simulationEngine.set_antHillX(antHillX);
-                            simulationEngine.set_antHillY(antHillY);
-                            simulationEngine.set_foodSourceX(foodSourceX);
-                            simulationEngine.set_foodSourceY(foodSourceY);
+                            simulationEngine.set_antHill(antHillX, antHillY);
+                            simulationEngine.set_foodSource(foodSourceX, foodSourceY);
                             button.setEnabled(false);
                             sliderNumOfAnts.setEnabled(false);
                             sliderLeadAngle.setEnabled(false);

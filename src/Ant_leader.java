@@ -35,9 +35,9 @@ public class Ant_leader extends Ant{
         return false;
     }
 
-    public boolean simulate(Point end){                                     //simulates ant movement, return true if ant has reached food source
+    public boolean simulate(Point end){                                             //simulates ant movement, return true if ant has reached food source
         
-        if(this.position.X_pos()  == end.X_pos() && this.position.Y_pos()  == end.Y_pos())   //checks if ant is at food source position
+        if(this.position  == end)                                           //checks if ant is at food source position
             return true;
 
         int x, y;
@@ -65,6 +65,7 @@ public class Ant_leader extends Ant{
 
         this.position.change_coordinates(x, y);               //changes its position
 
+        System.out.println(this.position.X_pos()+" "+this.position.Y_pos());
         return false;
     }
 }
