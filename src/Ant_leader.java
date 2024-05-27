@@ -12,7 +12,7 @@ public class Ant_leader extends Ant{
 
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
-        super(start);
+        super(new Point(start.X_pos(), start.Y_pos()));
         this.leader_angle = leader_angle_value;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
@@ -63,7 +63,7 @@ public class Ant_leader extends Ant{
         x = Math.round(x * (2 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
         y = Math.round(y * (2 / distance));
 
-        this.position.change_coordinates((short)x, (short)y);               //changes its position
+        this.position.change_coordinates(x, y);               //changes its position
 
         return false;
     }

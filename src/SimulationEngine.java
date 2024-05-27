@@ -102,6 +102,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
             }
         }
 
+        antLeader.simulate(food_source);
+
+        System.out.println(anthill.X_pos()+" "+" "+anthill.Y_pos());
+        System.out.println(antLeader.X_pos()+" "+" "+antLeader.Y_pos());
+
 
 
 
