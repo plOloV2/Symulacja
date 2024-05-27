@@ -80,14 +80,15 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
             //if(ant_hillImage != null)
-                g.drawImage(ant_hillImage, anthill.X_pos(), anthill.Y_pos(), 100, 100, this);
+                g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
 
-                g.setColor(new Color(102,51,0));
+                // g.setColor(new Color(102,51,0));
                 //g.fillOval(anthill.X_pos(), anthill.Y_pos(), 40, 40);
 
             //if(food_sourceImage != null)
-                g.drawImage(food_sourceImage, food_source.X_pos(), food_source.Y_pos(), 50, 50, this);
-                g.setColor(new Color(0,204,0));
+                g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
+                
+                // g.setColor(new Color(0,204,0));
                 //g.fillOval(food_source.X_pos(), food_source.Y_pos(), 40, 40);
 
     }
