@@ -15,11 +15,11 @@ public class Point {
     public int Y_pos(){                                 //returns y value
         return y_position;
     }
-    public void give_X_pos(int x){                                 //returns x value
+    public void give_X_pos(int x){                      //returns x value
         x_position = x;
     }
 
-    public void give_Y_pos(int y){                                 //returns y value
+    public void give_Y_pos(int y){                      //returns y value
         y_position = y;
     }
 

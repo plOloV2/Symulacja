@@ -69,7 +69,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
                 ant_hillImage = new ImageIcon("images/ant_hill.png").getImage();
                 food_sourceImage = new ImageIcon("images/food_source.png").getImage();
             } catch (Exception ex) {
-                System.out.println("image didnt load");
+                System.out.println("Image didnt load");
             }
 
     }
@@ -105,7 +105,6 @@ public class SimulationEngine extends JPanel implements ActionListener {
         antLeader.simulate(food_source);
 
         System.out.println(anthill.X_pos()+" "+" "+anthill.Y_pos());
-        System.out.println(antLeader.X_pos()+" "+" "+antLeader.Y_pos());
 
 
 

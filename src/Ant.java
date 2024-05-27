@@ -11,7 +11,7 @@ public class Ant {
     private BufferedImage antImage;
 
     public Ant(Point start){
-        this.position = start;
+        this.position = new Point(start.X_pos(), start.Y_pos());
         try {
             antImage = ImageIO.read(new File("images/ant.png"));
         } catch (IOException ex) {
@@ -24,12 +24,7 @@ public class Ant {
     }
 
     public void draw(Graphics g){
-        // if (antImage != null) {
             g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
-        // } else {
-        //     g.setColor(new Color(255, 0, 0));
-        //     g.fillOval(position.X_pos(), position.Y_pos(), 1, 1);
-        // }
     }
 
 }
