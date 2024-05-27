@@ -1,4 +1,3 @@
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -25,12 +24,12 @@ public class Ant {
     }
 
     public void draw(Graphics g){
-        if (antImage != null) {
-            g.drawImage(antImage, position.X_pos(), position.Y_pos(), null);
-        } else {
-            g.setColor(new Color(255, 0, 0));
-            g.fillOval(position.X_pos(), position.Y_pos(), 1, 1);
-        }
+        // if (antImage != null) {
+            g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
+        // } else {
+        //     g.setColor(new Color(255, 0, 0));
+        //     g.fillOval(position.X_pos(), position.Y_pos(), 1, 1);
+        // }
     }
 
 }
