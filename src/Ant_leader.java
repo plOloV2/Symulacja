@@ -12,7 +12,7 @@ public class Ant_leader extends Ant{
 
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
-        super(new Point(start.X_pos(), start.Y_pos()));
+        super(start);
         this.leader_angle = leader_angle_value;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
