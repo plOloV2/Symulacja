@@ -8,6 +8,7 @@ public class Ant_leader extends Ant{
     private Point last_direction = new Point(0, 0);         //previouse leader direction
     private int boardHeight;                                    //board boudaries
     private int boardWidth;
+    private int counter;                                        //every 3 move leader goes towards food_source
     
 
     
@@ -16,6 +17,7 @@ public class Ant_leader extends Ant{
         this.leader_angle = leader_angle_value;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
+        counter = 1;
     }
     
     private boolean angle_check(int x, int y){                      //this function checks if provided vector(x,y) makes smaller angle beetwen last_direction vector than leader_angle
@@ -39,10 +41,12 @@ public class Ant_leader extends Ant{
         
         if(this.position  == end)                                           //checks if ant is at food source position
             return true;
+        
+        counter++;
 
         int x, y;
         
-        if(last_direction.X_pos() == 0 && last_direction.Y_pos() == 0){     //cheks if leader is yet to move
+        if(counter == 5 || (last_direction.X_pos() == 0 && last_direction.Y_pos() == 0)){     //cheks if leader is yet to move
 
             x = end.X_pos() - this.position.X_pos();                        //if leader has not yet moved, first move will be in direction of food source
             y = end.Y_pos() - this.position.Y_pos();
@@ -60,10 +64,10 @@ public class Ant_leader extends Ant{
        
         float distance = (float)Math.sqrt(x*x+y*y);                         //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (2 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (2 / distance));
+        x = Math.round(x * (5 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (5 / distance));
 
-        this.position.change_coordinates(x, y);               //changes its position
+        this.position.change_coordinates(x, y);                             //changes its position
 
         System.out.println(this.position.X_pos()+" "+this.position.Y_pos());
         return false;
