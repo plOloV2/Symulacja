@@ -97,19 +97,18 @@ public class Board extends JFrame{
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-                if( Integer.parseInt(coordinatesAntHillX.getText().substring(12))<0 ||
-                    Integer.parseInt(coordinatesAntHillY.getText().substring(12))<0 ||
-                    Integer.parseInt(coordinatesAntHillX.getText().substring(12))>450 ||
-                    Integer.parseInt(coordinatesAntHillY.getText().substring(12))>450 ||
-                    Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))<0 ||
-                    Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))<0 ||
-                    Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))>450 ||
-                    Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))>450){
-                        JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
-                }
-                else{
                     try {
+                        if( Integer.parseInt(coordinatesAntHillX.getText().substring(12))<0 ||
+                        Integer.parseInt(coordinatesAntHillY.getText().substring(12))<0 ||
+                        Integer.parseInt(coordinatesAntHillX.getText().substring(12))>450 ||
+                        Integer.parseInt(coordinatesAntHillY.getText().substring(12))>450 ||
+                        Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))<0 ||
+                        Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))<0 ||
+                        Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))>450 ||
+                        Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))>450){
+                            JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
+                    }
+                    else{
                         antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(12));
                         antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(12));
                         foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(9));
@@ -131,6 +130,7 @@ public class Board extends JFrame{
                         coordinatesAntHillY.setEnabled(false);
                         coordinatesFoodSourceX.setEnabled(false);
                         coordinatesFoodSourceY.setEnabled(false);
+                    }
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!"); //nie wywołuje sie
 
@@ -140,7 +140,6 @@ public class Board extends JFrame{
                         System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceY.getText());
                     }
                 }     
-            }
         });
         simulationEngine.set_tick(tick);
     }

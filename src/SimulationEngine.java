@@ -31,13 +31,14 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     //objects
     private Ant_leader antLeader;
-    // antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardHeight);
     private Obstackle terrain;
     // terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 5, 10, 5);
     private ArrayList<Ant_worker> workers;
 
     // simulation logic
     Timer gameloop;
+    int tickDistance = 0;
+    int lastTick = 0;
     int time = 0; // for "time" measurement
 
 
@@ -45,7 +46,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
-        setBackground(Color.BLACK);
+        setBackground(new Color(0,102,0));
         anthill= new Point(-100,0);   
         food_source = new Point(-100, 0);
         antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
@@ -74,29 +75,34 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g){
-            //if(ant_hillImage != null)
                 g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
-
-                // g.setColor(new Color(102,51,0));
-                //g.fillOval(anthill.X_pos(), anthill.Y_pos(), 40, 40);
-
-            //if(food_sourceImage != null)
                 g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
-                
-                // g.setColor(new Color(0,204,0));
-                //g.fillOval(food_source.X_pos(), food_source.Y_pos(), 40, 40);
+                antLeader.draw(g);
 
     }
 
-
+    
 
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        
-        // if(tick == 3){
-        //     if(workers.size() < max_number_of_ants)
+        // tickDistance++;
+        // if((lastTick+100)>tickDistance){
+        //     lastTick = tickDistance;
+
+        //     if(workers.size()<max_number_of_ants){
         //         workers.add(new Ant_worker(anthill));
+        //     }
+        // }
+
+
+
+
+
+        
+        // if(tick%3 == 0){
+        //     if(workers.size() < max_number_of_ants)
+                
             
         //     tick = 1;
         // }
@@ -105,13 +111,10 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
         // end = antLeader.simulate(food_source);
 
-        // // if(max_number_of_ants==0){}
-        // // else{
-        // //     time = tick;
-        // //     if{
-
-        // //     }
-        // // }
+        // if(max_number_of_ants==0){}
+        // else{
+        //     time = tick;
+        // }
 
         // if(workers.size() > 0)
         //     end = workers.get(0).simulate(food_source, antLeader.current_position());
@@ -121,7 +124,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         //     end = workers.get(i).simulate(food_source, workers.get(i-1).current_position());
         
             
-        //if (!end) koniec symulacji
+        // //if (!end) koniec symulacji
     }
 
 
