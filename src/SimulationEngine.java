@@ -47,11 +47,10 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
         setBackground(new Color(0,102,0));
-        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
 
         import_images();
 
-        gameloop = new Timer(1000-tick, this);
+        gameloop = new Timer(100, this);
         gameloop.start();
     }
 
@@ -73,14 +72,20 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
 
     public void draw(Graphics g){
-                g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
-                g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
-                antLeader.draw(g);
-                if(workers != null){
-                    for(int i = 0; i < workers.size(); i++){
-                        workers.get(i).draw(g);
-                    }
-                }
+        if(anthill != null){
+            g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
+        }
+        if(food_source != null){
+            g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
+        }
+        if(antLeader != null){
+            antLeader.draw(g);
+        }
+        if(workers != null){
+            for(int i = 0; i < workers.size(); i++){
+                workers.get(i).draw(g);
+            }
+        }
 
 
     }
@@ -100,9 +105,9 @@ public class SimulationEngine extends JPanel implements ActionListener {
             }
         }
 
-        antLeader.simulate(food_source);
-
-        System.out.println(anthill.X_pos()+" "+" "+anthill.Y_pos());
+        if(antLeader != null){
+            antLeader.simulate(food_source);
+        }
 
 
 
@@ -149,7 +154,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
     public void set_antHill(int x, int y){
         anthill = new Point(x, y);
-        antLeader = new Ant_leader(anthill, y, x, y)
+        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
     }
     // public void set_antHillY(int y){
     //     anthill.give_Y_pos(y);
