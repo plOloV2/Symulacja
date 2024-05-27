@@ -96,7 +96,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         repaint();
         tickDistance++;
-        if((lastTick+100)>tickDistance){
+        if((lastTick+10)>tickDistance){
             lastTick = tickDistance;
             if(workers != null){
                 if(workers.size()<max_number_of_ants){
