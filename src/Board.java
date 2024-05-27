@@ -90,7 +90,7 @@ public class Board extends JFrame{
 
     private void applyChanges(){
         
-        tick = getSliderValue(sliderTicks,text1);
+        getSliderValueTick(sliderTicks,text1,simulationEngine);
         number_of_ants = getSliderValue(sliderNumOfAnts,text2);
         leader_angle = getSliderValue(sliderLeadAngle,text3);
 
@@ -133,7 +133,7 @@ public class Board extends JFrame{
                     }
                 }     
         });
-        simulationEngine.set_tick(tick);
+        
     }
 
     private SimulationEngine simulationEngine;
@@ -196,4 +196,18 @@ public class Board extends JFrame{
         });
         return slider.getValue();
     }
+    public static void getSliderValueTick(JSlider slider, JLabel text, SimulationEngine simulationEngine){
+        
+        slider.addChangeListener(new ChangeListener() {
+           
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                int value = slider.getValue();
+                text.setText(String.valueOf(value));
+                simulationEngine.set_tick(value);
+            }
+            
+        });
+    }
+
 }

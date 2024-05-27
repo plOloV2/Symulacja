@@ -36,7 +36,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private ArrayList<Ant_worker> workers;
 
     // simulation logic
-    Timer gameloop;
+    Timer simulationLoop;
     int tickDistance = 0;
     int lastTick = 0;
     int time = 0; // for "time" measurement
@@ -50,8 +50,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
         import_images();
 
-        gameloop = new Timer(100, this);
-        gameloop.start();
+        simulationLoop = new Timer(100, this);
+        simulationLoop.start();
     }
 
     
@@ -108,6 +108,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
         if(antLeader != null){
             antLeader.simulate(food_source);
         }
+
+        simulationLoop.setDelay(1000-tick);
 
 
 
