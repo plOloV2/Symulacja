@@ -98,39 +98,33 @@ public class Board extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                     try {
-                        if( Integer.parseInt(coordinatesAntHillX.getText().substring(12))<0 ||
-                        Integer.parseInt(coordinatesAntHillY.getText().substring(12))<0 ||
-                        Integer.parseInt(coordinatesAntHillX.getText().substring(12))>450 ||
-                        Integer.parseInt(coordinatesAntHillY.getText().substring(12))>450 ||
-                        Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))<0 ||
-                        Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))<0 ||
-                        Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))>450 ||
-                        Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))>450){
-                            JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
-                    }
-                    else{
                         antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(12));
                         antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(12));
                         foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(9));
                         foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(9));
-                        System.out.println("Wartość int: " + antHillX);
-                        System.out.println("Wartość int: " + antHillY);
-                        System.out.println("Wartość int: " + foodSourceX);
-                        System.out.println("Wartość int: " + foodSourceY);
-                        simulationEngine.set_number_of_ants(number_of_ants);
-                        simulationEngine.set_leader_angle(leader_angle);
-                        simulationEngine.set_antHillX(antHillX);
-                        simulationEngine.set_antHillY(antHillY);
-                        simulationEngine.set_foodSourceX(foodSourceX);
-                        simulationEngine.set_foodSourceY(foodSourceY);
-                        button.setEnabled(false);
-                        sliderNumOfAnts.setEnabled(false);
-                        sliderLeadAngle.setEnabled(false);
-                        coordinatesAntHillX.setEnabled(false);
-                        coordinatesAntHillY.setEnabled(false);
-                        coordinatesFoodSourceX.setEnabled(false);
-                        coordinatesFoodSourceY.setEnabled(false);
-                    }
+
+                        if( antHillX < 0 || antHillY < 0 || antHillX > 450 || antHillY > 450 || foodSourceX < 0 || foodSourceY < 0 || foodSourceX > 450 || foodSourceY > 450)
+                            JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
+                    
+                        else{
+                            System.out.println("Wartość int: " + antHillX);
+                            System.out.println("Wartość int: " + antHillY);
+                            System.out.println("Wartość int: " + foodSourceX);
+                            System.out.println("Wartość int: " + foodSourceY);
+                            simulationEngine.set_number_of_ants(number_of_ants);
+                            simulationEngine.set_leader_angle(leader_angle);
+                            simulationEngine.set_antHillX(antHillX);
+                            simulationEngine.set_antHillY(antHillY);
+                            simulationEngine.set_foodSourceX(foodSourceX);
+                            simulationEngine.set_foodSourceY(foodSourceY);
+                            button.setEnabled(false);
+                            sliderNumOfAnts.setEnabled(false);
+                            sliderLeadAngle.setEnabled(false);
+                            coordinatesAntHillX.setEnabled(false);
+                            coordinatesAntHillY.setEnabled(false);
+                            coordinatesFoodSourceX.setEnabled(false);
+                            coordinatesFoodSourceY.setEnabled(false);
+                        }
                     } catch (NumberFormatException ex) {
                         JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!"); //nie wywołuje sie
 
