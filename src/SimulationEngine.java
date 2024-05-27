@@ -78,6 +78,12 @@ public class SimulationEngine extends JPanel implements ActionListener {
                 g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
                 g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
                 antLeader.draw(g);
+                if(workers != null){
+                    for(int i = 0; i < workers.size(); i++){
+                        workers.get(i).draw(g);
+                    }
+                }
+
 
     }
 
@@ -86,14 +92,15 @@ public class SimulationEngine extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
-        // tickDistance++;
-        // if((lastTick+100)>tickDistance){
-        //     lastTick = tickDistance;
-
-        //     if(workers.size()<max_number_of_ants){
-        //         workers.add(new Ant_worker(anthill));
-        //     }
-        // }
+        tickDistance++;
+        if((lastTick+100)>tickDistance){
+            lastTick = tickDistance;
+            if(workers != null){
+                if(workers.size()<max_number_of_ants){
+                    workers.add(new Ant_worker(anthill));
+                }
+            }
+        }
 
 
 
