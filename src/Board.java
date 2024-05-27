@@ -98,42 +98,47 @@ public class Board extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 
-
-                try {
-                    antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(12));
-                    antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(12));
-                    foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(9));
-                    foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(9));
-                    System.out.println("Wartość int: " + antHillX);
-                    System.out.println("Wartość int: " + antHillY);
-                    System.out.println("Wartość int: " + foodSourceX);
-                    System.out.println("Wartość int: " + foodSourceY);
-                    button.setEnabled(false);
-                    sliderNumOfAnts.setEnabled(false);
-                    sliderLeadAngle.setEnabled(false);
-                    coordinatesAntHillX.setEnabled(false);
-                    coordinatesAntHillY.setEnabled(false);
-                    coordinatesFoodSourceX.setEnabled(false);
-                    coordinatesFoodSourceY.setEnabled(false);
-                } catch (NumberFormatException ex) {
-                    JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");
-
-                    System.out.println("Niepoprawny format liczby "+coordinatesAntHillX.getText());
-                    System.out.println("Niepoprawny format liczby "+coordinatesAntHillY.getText());
-                    System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceX.getText());
-                    System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceY.getText());
+                if(Integer.parseInt(coordinatesAntHillX.getText().substring(12))<0 ||
+                    Integer.parseInt(coordinatesAntHillY.getText().substring(12))>450 ||
+                    Integer.parseInt(coordinatesFoodSourceX.getText().substring(9))<0 ||
+                    Integer.parseInt(coordinatesFoodSourceY.getText().substring(9))>450){
+                        JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
                 }
+                else{
+                    try {
+                        antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(12));
+                        antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(12));
+                        foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(9));
+                        foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(9));
+                        System.out.println("Wartość int: " + antHillX);
+                        System.out.println("Wartość int: " + antHillY);
+                        System.out.println("Wartość int: " + foodSourceX);
+                        System.out.println("Wartość int: " + foodSourceY);
+                        simulationEngine.set_number_of_ants(number_of_ants);
+                        simulationEngine.set_leader_angle(leader_angle);
+                        simulationEngine.set_antHillX(antHillX);
+                        simulationEngine.set_antHillY(antHillY);
+                        simulationEngine.set_foodSourceX(foodSourceX);
+                        simulationEngine.set_foodSourceY(foodSourceY);
+                        button.setEnabled(false);
+                        sliderNumOfAnts.setEnabled(false);
+                        sliderLeadAngle.setEnabled(false);
+                        coordinatesAntHillX.setEnabled(false);
+                        coordinatesAntHillY.setEnabled(false);
+                        coordinatesFoodSourceX.setEnabled(false);
+                        coordinatesFoodSourceY.setEnabled(false);
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");
 
-               
+                        System.out.println("Niepoprawny format liczby "+coordinatesAntHillX.getText());
+                        System.out.println("Niepoprawny format liczby "+coordinatesAntHillY.getText());
+                        System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceX.getText());
+                        System.out.println("Niepoprawny format liczby "+coordinatesFoodSourceY.getText());
+                    }
+                }     
             }
         });
-        simulationEngine.get_tick(tick);
-        simulationEngine.get_number_of_ants(number_of_ants);
-        simulationEngine.get_leader_angle(leader_angle);
-        simulationEngine.get_antHillX(antHillX);
-        simulationEngine.get_antHillY(antHillY);
-        simulationEngine.get_foodSourceX(foodSourceX);
-        simulationEngine.get_foodSourceY(foodSourceY);
+        simulationEngine.set_tick(tick);
     }
 
     private SimulationEngine simulationEngine;
@@ -141,10 +146,10 @@ public class Board extends JFrame{
     private int boardHeight;
     private int boardWidth;
 
-    private Integer antHillX = 1000;
-    private Integer antHillY = 0;
-    private Integer foodSourceX = 1000;
-    private Integer foodSourceY = 0;
+    private Integer antHillX = 100;
+    private Integer antHillY = 400;
+    private Integer foodSourceX = 50;
+    private Integer foodSourceY = 400;
 
     private int tick = 0;
     private int number_of_ants = 0;
