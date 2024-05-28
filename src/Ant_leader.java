@@ -86,25 +86,38 @@ public class Ant_leader extends Ant{
             }
         }
         else{
+            boolean angle_change = false;
             do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
                 x = random.nextInt(40)+position.X_pos() - 20;
                 y = random.nextInt(40)+position.Y_pos() - 20;
 
-                if(x > boardWidth - 10)
-                    x = boardWidth - 10;
+                if(x > boardWidth - 10){
+                    x = end.X_pos();
+                    angle_change = true;
+                }
 
-                if(y > boardHeight - 10)
-                    y = boardHeight - 10;
-
-                if(x < 10)
-                    x = 10;
-
-                if(y < 10)
-                    y = 10;
-
+                if(y > boardHeight - 10){
+                    y = end.Y_pos();
+                    angle_change = true;
+                }
+                    
+                if(x < 10){
+                    x = end.X_pos();
+                    angle_change = true;
+                }
+                    
+                if(y < 10){
+                    y = end.Y_pos();
+                    angle_change = true;
+                }
+                    
+                if(angle_change)
+                    break;
+                
             }while(!angle_check(x, y));
-        }
+
+        }  
        
         x -= this.position.X_pos();
         y -= this.position.Y_pos();
