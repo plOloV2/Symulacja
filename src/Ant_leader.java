@@ -74,13 +74,13 @@ public class Ant_leader extends Ant{
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
                 return true;
             }
-            counter++;
 
+            counter++;
             
-            if(counter >= 3){                                                   //cheks if leader is yet to move
+            if(counter >= 3){
     
-                x = end.X_pos() - this.position.X_pos();
-                y = end.Y_pos() - this.position.Y_pos();
+                x = end.X_pos();
+                y = end.Y_pos();
     
                 counter = 0;
             }
@@ -88,8 +88,20 @@ public class Ant_leader extends Ant{
         else{
             do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
-                x = random.nextInt(boardWidth-40)+20;
-                y = random.nextInt(boardHeight-40)+20;
+                x = random.nextInt(40)+position.X_pos() - 20;
+                y = random.nextInt(40)+position.Y_pos() - 20;
+
+                if(x > boardWidth - 10)
+                    x = boardWidth - 10;
+
+                if(y > boardHeight - 10)
+                    y = boardHeight - 10;
+
+                if(x < 10)
+                    x = 10;
+
+                if(y < 10)
+                    y = 10;
 
             }while(!angle_check(x, y));
         }

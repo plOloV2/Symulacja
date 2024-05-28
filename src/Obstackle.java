@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class Obstackle {
 
-    private ArrayList<Point> occupied;              //list of all spots on board that are covered by some obstackle
+    private ArrayList<Point> occupied = new ArrayList<>();              //list of all spots on board that are covered by some obstackle
     private Random random = new Random();
 
 
@@ -13,11 +13,12 @@ public class Obstackle {
         
         for(int i = 0; i < number_of_obstakles; i++){
 
-            int x = random.nextInt(boardWidth);                                                                     //picks randome position for obstackle
-            int y = random.nextInt(boardHeight);
+            int x = random.nextInt(boardWidth - 20) + 10;                                                                     //picks randome position for obstackle
+            int y = random.nextInt(boardHeight - 20) + 10;
 
-            if(distance(x, y, food_source) <= 5 || distance(x, y, anthill) <= 5 || proximity_check(x, y, 10)){          //checks if this position is not too close to other obstackles, anthill or food source
-                i--;
+            double o1 = distance(x, y, food_source), o2 = distance(x, y, anthill);
+
+            if(o1 <= 5 || o2 <= 5 || !proximity_check(x, y, 10)){          //checks if this position is not too close to other obstackles, anthill or food source
                 continue;
             }
 
@@ -42,14 +43,13 @@ public class Obstackle {
                 if(y > boardHeight)
                     y = boardHeight;
                 
-                if(y > 0)
+                if(y < 0)
                     y = 0;
 
-                if(check_position(new Point(x, y)))                                                                 //checks if given point is not yet occupied
+                if(!check_position(new Point(x, y)))                                                                 //checks if given point is not yet occupied
                     occupied.add(new Point(x, y));
 
                 else{                                                                                               //if poit is occupied, subtracks 1 from iterator and repeates cycle
-                    i--;
                     continue;
                 }
 
@@ -61,8 +61,8 @@ public class Obstackle {
 
     private double distance(int x, int y, Point target){                //returns distance beetwen given point and x,y coordinates
 
-        x -= target.X_pos();
-        y -= target.Y_pos();
+        x = target.X_pos() - x;
+        y = target.Y_pos() - y;
 
         return (double)Math.sqrt(x*x+y*y);
     }
@@ -70,33 +70,30 @@ public class Obstackle {
     private boolean proximity_check(int x, int y, int distance){       //checks distance beetwen given point and x,y coordinates
         if(occupied != null){
             for(int i = 0; i < occupied.size(); i++)
-            if(distance(x, y, occupied.get(i)) <= distance)
-                return false;
-            return true;
+                if(distance(x, y, occupied.get(i)) <= distance)
+                    return false;
         }
-        else{
-            return true;
-        }
+
+        return true;
+
     }
 
     public boolean check_position(Point position){                    //checks if given point is occupied or not
         if(occupied != null){
             for(int i = 0; i < occupied.size(); i++)
                 if(occupied.get(i) == position)
-                    return false;
                     return true;
         }
-        else{
-            return true;
-        }
-            
+        
+        return false;
+ 
     }
 
     public void draw(Graphics g){
         g.setColor(Color.gray);
         if(occupied != null){
             for(int i = 0; i < occupied.size(); i++){
-                g.fillRect(occupied.get(i).X_pos(), occupied.get(i).Y_pos(), 10, 10);
+                g.fillRect(occupied.get(i).X_pos(), occupied.get(i).Y_pos(), 1, 1);
             }
         }
 
