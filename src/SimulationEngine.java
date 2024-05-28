@@ -87,6 +87,9 @@ public class SimulationEngine extends JPanel implements ActionListener {
                 workers.get(i).draw(g);
             }
         }
+        // if(terrain != null){
+        //     terrain.draw(g);
+        // }
 
 
     }
@@ -99,6 +102,9 @@ public class SimulationEngine extends JPanel implements ActionListener {
             if(workers == null){
                 workers = new ArrayList<Ant_worker>();
             }
+            // if(terrain == null){
+            //     terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 30, 5, 15);
+            // }
         }
 
 

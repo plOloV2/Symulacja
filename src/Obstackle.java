@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -66,20 +68,37 @@ public class Obstackle {
     }
 
     private boolean proximity_check(int x, int y, int distance){       //checks distance beetwen given point and x,y coordinates
-
-        for(int i = 0; i < occupied.size(); i++)
+        if(occupied != null){
+            for(int i = 0; i < occupied.size(); i++)
             if(distance(x, y, occupied.get(i)) <= distance)
                 return false;
-
-        return true;
+            return true;
+        }
+        else{
+            return true;
+        }
     }
 
     public boolean check_position(Point position){                    //checks if given point is occupied or not
+        if(occupied != null){
+            for(int i = 0; i < occupied.size(); i++)
+                if(occupied.get(i) == position)
+                    return false;
+                    return true;
+        }
+        else{
+            return true;
+        }
+            
+    }
 
-        for(int i = 0; i < occupied.size(); i++)
-            if(occupied.get(i) == position)
-                return false;
+    public void draw(Graphics g){
+        g.setColor(Color.gray);
+        if(occupied != null){
+            for(int i = 0; i < occupied.size(); i++){
+                g.fillRect(occupied.get(i).X_pos(), occupied.get(i).Y_pos(), 10, 10);
+            }
+        }
 
-        return true;
     }
 }
