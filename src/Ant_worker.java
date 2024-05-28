@@ -11,8 +11,8 @@ public class Ant_worker extends Ant{
             return true;
 
 
-        int x = this.position.X_pos() - previouse_ant_position.X_pos();     //calculates x and y diference betwen its position and previos ant position
-        int y = this.position.Y_pos() - previouse_ant_position.Y_pos();
+        int x = previouse_ant_position.X_pos() - this.position.X_pos();     //calculates x and y diference betwen its position and previos ant position
+        int y = previouse_ant_position.Y_pos() - this.position.Y_pos();
         
         float distance = (float)Math.sqrt(x*x+y*y);                         //calculates distance betwen its position and previos ant position
 
@@ -26,7 +26,6 @@ public class Ant_worker extends Ant{
 
         this.position.change_coordinates(x, y);               //changes its position
 
-        System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);
         return false;
     }
 }
