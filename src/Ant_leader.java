@@ -36,9 +36,11 @@ public class Ant_leader extends Ant{
         d = a/(b*c);
 
         d = Math.toDegrees(Math.acos(d));
-
+        
         if(d <= leader_angle)
             return true;
+        
+            
         return false;
     }
 
@@ -67,23 +69,39 @@ public class Ant_leader extends Ant{
         else{
             do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
-                x = random.nextInt(boardWidth);
-                y = random.nextInt(boardHeight);
+                x = random.nextInt(boardWidth-10);
+                y = random.nextInt(boardHeight-10);
 
-            }while(angle_check(x, y));
+            }while(!angle_check(x, y));
         }
        
+        x = this.position.X_pos() - x;
+        y = this.position.Y_pos() - y;
+
         distance = (float)Math.sqrt(x*x+y*y);                               //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (4 / distance));        
+        x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (10 / distance));   
+
+        System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);     
         
         last_position.new_coordinates(this.position.X_pos(), this.position.X_pos());
 
         this.position.change_coordinates(x, y);                             //changes its position
 
+        if(this.position.X_pos() < 5 )
+            this.position.change_coordinates(5, last_position.Y_pos() + y);
 
-        System.out.println(this.position.X_pos()+" "+this.position.Y_pos()+" "+counter);
+        if(this.position.Y_pos() < 5 )
+            this.position.change_coordinates(last_position.X_pos() + x, 5);
+
+        if(this.position.X_pos() > 470 )
+            this.position.change_coordinates(470, last_position.Y_pos() + y);
+
+        if(this.position.Y_pos() > 470 )
+            this.position.change_coordinates(last_position.X_pos() + x, 470);
+
+
         return false;
     }
 }
