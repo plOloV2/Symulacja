@@ -9,7 +9,7 @@ public class Ant_leader extends Ant{
     // randomizer 
     private Random random = new Random();
     private int leader_angle;                                   //angle at whitch leader can change direction
-    private Point last_position = new Point(0, 0);         //previouse leader direction
+    private Point last_position;                                //previouse leader direction
     private int boardHeight;                                    //board boudaries
     private int boardWidth;
     private int counter;                                        //every 3 move leader goes towards food_source
@@ -22,12 +22,19 @@ public class Ant_leader extends Ant{
         this.leader_angle = leader_angle_value;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
+        this.last_position = new Point(start.X_pos(), start.Y_pos());
         counter = 1;
 
         line = new ArrayList<>();
     }
     
     private boolean angle_check(int x, int y){                      //this function checks if provided vector(x,y) makes smaller angle beetwen last_position vector than leader_angle
+
+        if(last_position.X_pos() == this.position.X_pos() && last_position.Y_pos() == this.position.Y_pos())
+            return true;
+
+        
+
         double a, b, c, d;
         int x1, y1, x2, y2;
 
@@ -44,7 +51,7 @@ public class Ant_leader extends Ant{
 
         d = Math.toDegrees(Math.acos(d));
         
-        if(d <= leader_angle)
+        if(d <= leader_angle || 360-d <= leader_angle)
             return true;
         
             
@@ -56,58 +63,48 @@ public class Ant_leader extends Ant{
         if(this.position  == end)                                           //checks if ant is at food source position
             return true;
         
+    
+        int x = 0, y = 0;
+
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
-        
-        if(distance <= 5){
-            this.position.new_coordinates(end.X_pos(), end.Y_pos());
-            return true;
-        }
-        counter++;
 
-        int x, y;
-        
-        if(counter >= 5){                                                   //cheks if leader is yet to move
+        if(distance < 100){
 
-            x = end.X_pos() - this.position.X_pos();                        //if leader has not yet moved, first move will be in direction of food source
-            y = end.Y_pos() - this.position.Y_pos();
+            if(distance <= 10){
+                this.position.new_coordinates(end.X_pos(), end.Y_pos());
+                return true;
+            }
+            counter++;
 
-            counter = 0;
+            
+            if(counter >= 3){                                                   //cheks if leader is yet to move
+    
+                x = end.X_pos() - this.position.X_pos();
+                y = end.Y_pos() - this.position.Y_pos();
+    
+                counter = 0;
+            }
         }
         else{
             do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
-                x = random.nextInt(boardWidth-10);
-                y = random.nextInt(boardHeight-10);
+                x = random.nextInt(boardWidth-40)+20;
+                y = random.nextInt(boardHeight-40)+20;
 
             }while(!angle_check(x, y));
         }
        
-        x = this.position.X_pos() - x;
-        y = this.position.Y_pos() - y;
+        x -= this.position.X_pos();
+        y -= this.position.Y_pos();
 
         distance = (float)Math.sqrt(x*x+y*y);                               //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (10 / distance));   
-
-        //System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);     
+        x = Math.round(x * (5 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (5 / distance));   
         
-        last_position.new_coordinates(this.position.X_pos(), this.position.X_pos());
+        last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());
 
         this.position.change_coordinates(x, y);                             //changes its position
-
-        if(this.position.X_pos() < 5 )
-            this.position.change_coordinates(5, last_position.Y_pos() + y);
-
-        if(this.position.Y_pos() < 5 )
-            this.position.change_coordinates(last_position.X_pos() + x, 5);
-
-        if(this.position.X_pos() > 470 )
-            this.position.change_coordinates(470, last_position.Y_pos() + y);
-
-        if(this.position.Y_pos() > 470 )
-            this.position.change_coordinates(last_position.X_pos() + x, 470);
-
 
         return false;
     }
