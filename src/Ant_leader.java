@@ -68,26 +68,23 @@ public class Ant_leader extends Ant{
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
 
         if(distance < 100){
-            
+            x = random.nextInt(40)+position.X_pos() - 20;
+            y = random.nextInt(40)+position.Y_pos() - 20;
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
                 return true;
             }
-            else{
-                x = random.nextInt(40)+position.X_pos() - 20;
-                y = random.nextInt(40)+position.Y_pos() - 20;
-            }
 
             counter++;
             
-            if(counter >= 10){
+            // if(counter >= 10){
     
-                x = end.X_pos();
-                y = end.Y_pos();
+            //     x = end.X_pos();
+            //     y = end.Y_pos();
     
-                counter = 1;
-            }
+            //     counter = 1;
+            // }
         }
         else{
             boolean angle_change = false;
