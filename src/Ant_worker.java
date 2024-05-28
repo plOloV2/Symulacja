@@ -26,6 +26,7 @@ public class Ant_worker extends Ant{
 
         this.position.change_coordinates(x, y);               //changes its position
 
+        System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);
         return false;
     }
 }

@@ -94,13 +94,31 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        repaint();
+        if(antLeader != null){
+            if(workers == null){
+                workers = new ArrayList<Ant_worker>();
+            }
+        }
+
+
+        if((lastTick+20)<tickDistance){ // licznik tak aby co 10 powtórzen ruchu pojawiała sie nowa mrówka
+            lastTick = 0;
+            tickDistance = 0;
+            if(workers != null){    //gdy tablica mrówek nie jest pusta to dodaje chodzi o to ze inaczej nie mozna uzyc workers.size()
+                if(workers.size() <= max_number_of_ants){
+                    workers.add(new Ant_worker(anthill)); // dodaje mrówke
+                }
+            }
+        }
         tickDistance++;
-        if((lastTick+10)>tickDistance){
-            lastTick = tickDistance;
-            if(workers != null){
-                if(workers.size()<max_number_of_ants){
-                    workers.add(new Ant_worker(anthill));
+
+        if(workers != null){
+            for(int i = 0; i < workers.size(); i++){
+                if(i == 0){
+                    workers.get(i).simulate(food_source, antLeader.current_position());
+                }
+                else{
+                    workers.get(i).simulate(food_source, workers.get(i-1).current_position());
                 }
             }
         }
@@ -108,11 +126,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
         if(antLeader != null){
             antLeader.simulate(food_source);
         }
-
+        
         simulationLoop.setDelay(1000-tick);
 
 
-
+        repaint();
 
 
         

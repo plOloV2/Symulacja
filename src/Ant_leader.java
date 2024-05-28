@@ -83,7 +83,7 @@ public class Ant_leader extends Ant{
         x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
         y = Math.round(y * (10 / distance));   
 
-        System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);     
+        //System.out.println("p: "+this.position.X_pos()+" "+this.position.Y_pos()+" zmiana: "+x+" "+y);     
         
         last_position.new_coordinates(this.position.X_pos(), this.position.X_pos());
 
