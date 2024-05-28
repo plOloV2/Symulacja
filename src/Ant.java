@@ -7,6 +7,15 @@ import javax.imageio.ImageIO;
 
 
 public class Ant {
+    class Line{     //klasa do przechowywania obiektu linia
+        int x1, y1, x2, y2; //koordynaty oby punktów
+        public Line(int x1, int y1, int x2, int y2){
+            this.x1 = x1;
+            this.y1 = y1;
+            this.x2 = x2;
+            this.y2 = y2;
+        }
+    }
     protected Point position;               //current position of ant
     private BufferedImage antImage;
 

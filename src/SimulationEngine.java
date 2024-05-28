@@ -80,6 +80,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         }
         if(antLeader != null){
             antLeader.draw(g);
+            antLeader.draw1(g);
         }
         if(workers != null){
             for(int i = 0; i < workers.size(); i++){
