@@ -12,18 +12,17 @@ public class Ant_leader extends Ant{
     private Point last_position;                                //previouse leader direction
     private int boardHeight;                                    //board boudaries
     private int boardWidth;
-    private int counter;                                        //every 3 move leader goes towards food_source
+    private int counter = 0;                                    //every 3 move leader goes towards food_source
     
     private ArrayList<Line> line;                      //lista przechowująca linie
 
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
         super(start);
-        this.leader_angle = leader_angle_value;
+        this.leader_angle = leader_angle_value/2;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         this.last_position = new Point(start.X_pos(), start.Y_pos());
-        counter = 1;
 
         line = new ArrayList<>();
     }
@@ -63,7 +62,7 @@ public class Ant_leader extends Ant{
         if(this.position  == end)                                           //checks if ant is at food source position
             return true;
         
-    
+        
         int x = 0, y = 0;
 
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
@@ -77,12 +76,12 @@ public class Ant_leader extends Ant{
 
             counter++;
             
-            if(counter >= 3){
+            if(counter >= 4){
     
                 x = end.X_pos();
                 y = end.Y_pos();
     
-                counter = 0;
+                counter = 1;
             }
         }
         else{
@@ -118,6 +117,12 @@ public class Ant_leader extends Ant{
             }while(!angle_check(x, y));
 
         }  
+
+        if(counter == 0){
+            x = end.X_pos();
+            y = end.Y_pos();
+            counter ++;
+        }
        
         x -= this.position.X_pos();
         y -= this.position.Y_pos();

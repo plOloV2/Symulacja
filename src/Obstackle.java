@@ -31,8 +31,8 @@ public class Obstackle {
                 x = occupied.get(occupied.size()-1).X_pos();                                                        //takes last obstackle position
                 y = occupied.get(occupied.size()-1).Y_pos();
 
-                x += random.nextInt(2) - 1;                                                                         //changes its x and y values by -1, 0 or 1
-                y += random.nextInt(2) - 1;
+                x += random.nextInt(3) - 1;                                                                         //changes its x and y values by -1, 0 or 1
+                y += random.nextInt(3) - 1;
 
                 if(x > boardWidth)                                                                                  //checks if x and y is not out of boundaries
                     x = boardWidth;

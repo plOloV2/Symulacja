@@ -103,7 +103,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
                 workers = new ArrayList<Ant_worker>();
             }
             if(terrain == null){
-                terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 30, 50, 20);
+                terrain = new Obstackle(anthill, food_source, boardHeight, boardWidth, 30, 100, 50);
             }
         }
 
