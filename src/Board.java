@@ -107,10 +107,6 @@ public class Board extends JFrame{
                             JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
                     
                         else{
-                            System.out.println("Wartość int: " + antHillX);
-                            System.out.println("Wartość int: " + antHillY);
-                            System.out.println("Wartość int: " + foodSourceX);
-                            System.out.println("Wartość int: " + foodSourceY);
                             simulationEngine.set_number_of_ants(number_of_ants);
                             simulationEngine.set_leader_angle(leader_angle);
                             simulationEngine.set_antHill(antHillX, antHillY);
@@ -146,7 +142,6 @@ public class Board extends JFrame{
     private Integer foodSourceX = 50;
     private Integer foodSourceY = 400;
 
-    private int tick = 0;
     private int number_of_ants = 0;
     private int leader_angle = 0;
     

@@ -5,7 +5,6 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Random;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -21,9 +20,6 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private int leader_angle;           //describes max angle or leaders path change
     private Point anthill;              //for user to decide position          //for user to decide position
     private Point food_source;          //for user to decide position
-    private Random random = new Random();
-    private int tX;
-    private int tY;
 
     private Image ant_hillImage;
     private Image food_sourceImage;
@@ -141,31 +137,6 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
 
         
-        // if(tick%3 == 0){
-        //     if(workers.size() < max_number_of_ants)
-                
-            
-        //     tick = 1;
-        // }
-        // else 
-        //     tick ++;
-
-        // end = antLeader.simulate(food_source);
-
-        // if(max_number_of_ants==0){}
-        // else{
-        //     time = tick;
-        // }
-
-        // if(workers.size() > 0)
-        //     end = workers.get(0).simulate(food_source, antLeader.current_position());
-
-
-        // for(int i = 1; i < workers.size(); i++)
-        //     end = workers.get(i).simulate(food_source, workers.get(i-1).current_position());
-        
-            
-        // //if (!end) koniec symulacji
     }
 
 
@@ -183,14 +154,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
         anthill = new Point(x, y);
         antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
     }
-    // public void set_antHillY(int y){
-    //     anthill.give_Y_pos(y);
-    // }
     public void set_foodSource(int x, int y){
         food_source = new Point(x,y);
     }
-    // public void set_foodSourceY(int y){
-    //     food_source.give_Y_pos(y);
-    // }
 
 }
