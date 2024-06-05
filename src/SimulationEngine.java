@@ -121,7 +121,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
                     workers.get(i).simulate(food_source, antLeader.current_position());
                 }
                 else{
-                    workers.get(i).simulate(food_source, workers.get(i-1).current_position());
+                    end = workers.get(i).simulate(food_source, workers.get(i-1).current_position());
                 }
             }
         }
@@ -132,11 +132,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
         
         simulationLoop.setDelay(1000-tick);
 
+        if(end)
+            System.out.println("Koniec"); //ostatnia mrówka jest u celu
 
         repaint();
 
-
-        
     }
 
 
