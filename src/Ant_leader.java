@@ -65,11 +65,43 @@ public class Ant_leader extends Ant{
         
         int x = 0, y = 0;
 
+        if(counter == 0){
+            x = end.X_pos();
+            y = end.Y_pos();
+            counter ++;
+        }
+
+        boolean angle_change = false;
+        do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
+
+            x = random.nextInt(40)+position.X_pos() - 20;
+            y = random.nextInt(40)+position.Y_pos() - 20;
+
+            if(x > (boardWidth - 10)){
+                x = end.X_pos();
+                angle_change = true;
+            }
+
+            if(y > (boardHeight - 10)){
+                y = end.Y_pos();
+                angle_change = true;
+            }
+                
+            if(x < 10){
+                x = end.X_pos();
+                angle_change = true;
+            }
+                
+            if(y < 10){
+                y = end.Y_pos();
+                angle_change = true;
+            }
+            
+        }while(!angle_check(x, y) && !angle_change);
+
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
 
         if(distance < 100){
-            x = random.nextInt(40)+position.X_pos() - 20;
-            y = random.nextInt(40)+position.Y_pos() - 20;
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
@@ -78,53 +110,14 @@ public class Ant_leader extends Ant{
 
             counter++;
             
-            // if(counter >= 10){
+            if(counter >= 5){
     
-            //     x = end.X_pos();
-            //     y = end.Y_pos();
+                x = end.X_pos();
+                y = end.Y_pos();
     
-            //     counter = 1;
-            // }
-        }
-        else{
-            boolean angle_change = false;
-            do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
-
-                x = random.nextInt(40)+position.X_pos() - 20;
-                y = random.nextInt(40)+position.Y_pos() - 20;
-
-                if(x > (boardWidth - 10)){
-                    x = end.X_pos();
-                    angle_change = true;
-                }
-
-                if(y > (boardHeight - 10)){
-                    y = end.Y_pos();
-                    angle_change = true;
-                }
-                    
-                if(x < 10){
-                    x = end.X_pos();
-                    angle_change = true;
-                }
-                    
-                if(y < 10){
-                    y = end.Y_pos();
-                    angle_change = true;
-                }
-                    
-                if(angle_change)
-                    break;
-                
-            }while(!angle_check(x, y));
-
-        }  
-
-        if(counter == 0){
-            x = end.X_pos();
-            y = end.Y_pos();
-            counter ++;
-        }
+                counter = 1;
+            }
+        } 
        
         x -= this.position.X_pos();
         y -= this.position.Y_pos();
