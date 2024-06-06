@@ -32,4 +32,11 @@ public class Point {
         this.x_position = x;
         this.y_position = y;
     }
+
+    public boolean checkIfEquals(Point point){
+        if(this.x_position == point.x_position && this.y_position == point.y_position){
+            return true;
+        }
+        return false;
+    }
 }

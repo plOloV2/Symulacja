@@ -14,7 +14,7 @@ public class Ant_leader extends Ant{
     private int boardWidth;
     private int counter = 0;                                    //every 3 move leader goes towards food_source
     
-    private ArrayList<Line> line;                      //lista przechowująca linie
+    private ArrayList<Point> line;                      //lista przechowująca linie
 
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
@@ -23,6 +23,7 @@ public class Ant_leader extends Ant{
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         this.last_position = new Point(start.X_pos(), start.Y_pos());
+        
 
         line = new ArrayList<>();
     }
@@ -63,7 +64,7 @@ public class Ant_leader extends Ant{
             return true;
         
         
-        int x = 0, y = 0;
+        int x = end.X_pos(), y = end.X_pos();
 
         if(counter == 0){
             x = end.X_pos();
@@ -105,6 +106,7 @@ public class Ant_leader extends Ant{
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
+                setCanSimulate();                                               // if ant is at food source dont draw it
                 return true;
             }
 
@@ -136,9 +138,9 @@ public class Ant_leader extends Ant{
 
     public void draw1(Graphics g){  //metoda do rysowania lini mozna ja pozniej wrzucic w ant
         g.setColor(Color.RED);  
-        line.add(new Line(position.X_pos(),position.Y_pos(),last_position.X_pos(),last_position.Y_pos()));
-        for(int i = 0; i < line.size(); i++){
-            g.drawLine(line.get(i).x1, line.get(i).y1, line.get(i).x2, line.get(i).y2);
+        line.add(new Point(position.X_pos(),position.Y_pos()));
+        for(int i = 1; i < line.size(); i++){
+            g.drawLine(line.get(i).X_pos(), line.get(i).Y_pos(), line.get(i-1).X_pos(), line.get(i-1).Y_pos());
         }
         
     }

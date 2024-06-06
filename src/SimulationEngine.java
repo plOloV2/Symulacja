@@ -69,18 +69,23 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
         if(anthill != null){
-            g.drawImage(ant_hillImage, anthill.X_pos()-32, anthill.Y_pos()-32, 100, 100, this);
+            g.drawImage(ant_hillImage, anthill.X_pos()-50, anthill.Y_pos()-50, 100, 100, this);
         }
         if(food_source != null){
-            g.drawImage(food_sourceImage, food_source.X_pos()-10, food_source.Y_pos()-10, 50, 50, this);
+            g.drawImage(food_sourceImage, food_source.X_pos()-25, food_source.Y_pos()-25, 50, 50, this);
         }
         if(antLeader != null){
-            antLeader.draw(g);
-            antLeader.draw1(g);
+                antLeader.draw(g);
+                antLeader.draw1(g);
+
+
         }
         if(workers != null){
             for(int i = 0; i < workers.size(); i++){
                 workers.get(i).draw(g);
+                if(i == (max_number_of_ants-1)){
+                    workers.get(i).draw1(g);
+                }
             }
         }
         if(terrain != null){
@@ -94,6 +99,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(antLeader != null){
             if(workers == null){
                 workers = new ArrayList<Ant_worker>();
@@ -108,8 +114,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
             lastTick = 0;
             tickDistance = 0;
             if(workers != null){    //gdy tablica mrówek nie jest pusta to dodaje chodzi o to ze inaczej nie mozna uzyc workers.size()
-                if(workers.size() <= max_number_of_ants){
+                if(workers.size() < (max_number_of_ants-1)){
                     workers.add(new Ant_worker(anthill)); // dodaje mrówke
+                }
+                else if(workers.size() == (max_number_of_ants-1)){
+                    workers.add(new LastWorker(anthill));
                 }
             }
         }
@@ -138,7 +147,6 @@ public class SimulationEngine extends JPanel implements ActionListener {
         repaint();
 
     }
-
 
 
     public void set_tick(int tick){

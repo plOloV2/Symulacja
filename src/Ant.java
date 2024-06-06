@@ -18,6 +18,7 @@ public class Ant {
     }
     protected Point position;               //current position of ant
     private BufferedImage antImage;
+    private boolean canSimulate = true;
 
     public Ant(Point start){
         this.position = new Point(start.X_pos(), start.Y_pos());
@@ -32,8 +33,16 @@ public class Ant {
         return position;
     }
 
-    public void draw(Graphics g){
-            g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
+    public void setCanSimulate(){   
+        this.canSimulate = false;
     }
+
+    public void draw(Graphics g){
+        if(canSimulate){
+            g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
+        }
+           
+    }
+
 
 }
