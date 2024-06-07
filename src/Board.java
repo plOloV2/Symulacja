@@ -22,6 +22,7 @@ public class Board extends JFrame{
         this.boardWidth = boardWidth;
         this.simulationEngine = simulationEngine;
         initComponents();
+        
     }
 
     private void initComponents(){
@@ -82,17 +83,13 @@ public class Board extends JFrame{
         panel3.setSize(boardWidth, 50);
         panel3.setLayout(new GridLayout());
 
-        //this.pack();
-
+        setSliders();
         applyChanges();
+        //this.pack();
     }
 
 
     private void applyChanges(){
-        
-        getSliderValueTick(sliderTicks,text1,simulationEngine);
-        number_of_ants = getSliderValue(sliderNumOfAnts,text2);
-        leader_angle = getSliderValue(sliderLeadAngle,text3);
 
         button.addActionListener(new ActionListener() {
             @Override
@@ -107,8 +104,8 @@ public class Board extends JFrame{
                             JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
                     
                         else{
-                            simulationEngine.set_number_of_ants(number_of_ants);
-                            simulationEngine.set_leader_angle(leader_angle);
+                            simulationEngine.set_number_of_ants(sliderNumOfAnts.getValue());
+                            simulationEngine.set_leader_angle(sliderLeadAngle.getValue());
                             simulationEngine.set_antHill(antHillX, antHillY);
                             simulationEngine.set_foodSource(foodSourceX, foodSourceY);
                             button.setEnabled(false);
@@ -132,7 +129,14 @@ public class Board extends JFrame{
         
     }
 
+    private void setSliders(){
+        getSliderValueTick(sliderTicks,text1,simulationEngine);
+        getSliderValue(sliderNumOfAnts,text2);
+        getSliderValue(sliderLeadAngle,text3);
+    }
+
     private SimulationEngine simulationEngine;
+    private int value;
 
     private int boardHeight;
     private int boardWidth;
@@ -178,7 +182,7 @@ public class Board extends JFrame{
 
 
 
-    public static int getSliderValue(JSlider slider, JLabel text){
+    public static void getSliderValue(JSlider slider, JLabel text){
         
         slider.addChangeListener(new ChangeListener() {
            
@@ -189,7 +193,6 @@ public class Board extends JFrame{
             }
             
         });
-        return slider.getValue();
     }
     public static void getSliderValueTick(JSlider slider, JLabel text, SimulationEngine simulationEngine){
         
