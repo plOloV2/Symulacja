@@ -127,16 +127,16 @@ public class SimulationEngine extends JPanel implements ActionListener {
         if(workers != null){
             for(int i = 0; i < workers.size(); i++){
                 if(i == 0){
-                    workers.get(i).simulate(food_source, antLeader.current_position());
+                    workers.get(i).simulate(food_source, antLeader.current_position(), terrain);
                 }
                 else{
-                    end = workers.get(i).simulate(food_source, workers.get(i-1).current_position());
+                    end = workers.get(i).simulate(food_source, workers.get(i-1).current_position(), terrain);
                 }
             }
         }
 
         if(antLeader != null){
-            antLeader.simulate(food_source);
+            antLeader.simulate(food_source, terrain);
         }
         
         simulationLoop.setDelay(1000-tick);

@@ -14,7 +14,7 @@ public class Ant_leader extends Ant{
     private int boardWidth;
     private int counter = 0;                                    //every 3 move leader goes towards food_source
     
-    private ArrayList<Point> line;                      //lista przechowująca linie
+    private ArrayList<Point> line;                              //lista przechowująca linie
 
     
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
@@ -58,9 +58,9 @@ public class Ant_leader extends Ant{
         return false;
     }
 
-    public boolean simulate(Point end){                                     //simulates ant movement, return true if ant has reached food source
+    public boolean simulate(Point end, Obstackle terrain){                                                             //simulates ant movement, return true if ant has reached food source
         
-        if(this.position  == end)                                           //checks if ant is at food source position
+        if(this.position.X_pos()  == end.X_pos() && this.position.Y_pos() == end.Y_pos())           //checks if ant is at food source position
             return true;
         
         
@@ -73,7 +73,7 @@ public class Ant_leader extends Ant{
         }
 
         boolean angle_change = false;
-        do{                                                             //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
+        do{                                                                                         //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
             x = random.nextInt(40)+position.X_pos() - 20;
             y = random.nextInt(40)+position.Y_pos() - 20;
@@ -126,8 +126,11 @@ public class Ant_leader extends Ant{
 
         distance = (float)Math.sqrt(x*x+y*y);                               //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (5 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (5 / distance));   
+        x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (10 / distance));
+
+        if(check_collision(x, y, terrain))
+            System.out.println("git");
         
         last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());
 

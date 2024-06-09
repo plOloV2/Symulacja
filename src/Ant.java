@@ -2,6 +2,11 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 import javax.imageio.ImageIO;
 
@@ -44,5 +49,58 @@ public class Ant {
            
     }
 
+    protected boolean check_collision(int x, int y, Obstackle terrain){
 
+        boolean[][]move_board = new boolean[Math.abs(x)][Math.abs(y)];
+
+        for(int i = 0; i != x; i += x/Math.abs(x))
+            for(int j = 0; j != y; j += y/Math.abs(y))
+                move_board[Math.abs(i)][Math.abs(j)] = terrain.check_position(new Point(this.position.X_pos() + i, this.position.Y_pos() + j));
+
+        
+        PriorityQueue<Cell> openSet = new PriorityQueue<>(Comparator.comparingInt(a -> a.heuristic));
+        openSet.add(new Cell(0, 0, heuristic(0, 0, x, y)));
+        int[] rowNum = {-1, 0, 0, 1};
+        int[] colNum = {0, -1, 1, 0};
+
+        while (!openSet.isEmpty()) {
+            Cell current = openSet.poll();
+
+            if (current.x == x && current.y == y) 
+                return true;            // Path found
+            
+
+            move_board[Math.abs(current.x)][Math.abs(current.y)] = true;
+
+            for (int i = 0; i < 4; i++) {
+                int new_x = current.x + rowNum[i];
+                int new_y = current.y + colNum[i];
+
+                if (isValid(new_x, new_y, x, y) && !move_board[new_x][new_y]) {
+                    Cell neighbor = new Cell(new_x, new_y, heuristic(new_x, new_y, x, y));
+                    openSet.add(neighbor);
+                }
+            }
+        }
+        return false;                   // No path found
+    }
+
+    private int heuristic(int x, int y, int x_kon, int y_kon) {
+        return Math.abs(x - x_kon) + Math.abs(y - y_kon);
+    }
+
+    private boolean isValid(int x, int y, int x_kon, int y_kon) {
+        return (x >= 0) && (x < x_kon) && (y >= 0) && (y < y_kon);
+    }
+
+    private class Cell {
+        int x, y;
+        int heuristic;
+    
+        Cell(int x, int y, int heuristic) {
+            this.x = x;
+            this.y = y;
+            this.heuristic = heuristic;
+        }
+    }
 }

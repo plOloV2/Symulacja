@@ -18,7 +18,7 @@ public class Obstackle {
 
             double o1 = distance(x, y, food_source), o2 = distance(x, y, anthill);
 
-            if(o1 <= 5 || o2 <= 5 || !proximity_check(x, y, 10)){          //checks if this position is not too close to other obstackles, anthill or food source
+            if(o1 <= 100 || o2 <= 100 || !proximity_check(x, y, 20)){          //checks if this position is not too close to other obstackles, anthill or food source
                 continue;
             }
 
@@ -81,7 +81,7 @@ public class Obstackle {
     public boolean check_position(Point position){                    //checks if given point is occupied or not
         if(occupied != null){
             for(int i = 0; i < occupied.size(); i++)
-                if(occupied.get(i) == position)
+                if(occupied.get(i).X_pos() == position.X_pos() && occupied.get(i).Y_pos() == position.Y_pos())
                     return true;
         }
         

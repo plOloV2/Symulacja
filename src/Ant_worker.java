@@ -7,7 +7,7 @@ public class Ant_worker extends Ant{
     }
     Point last_position;
 
-    public boolean simulate(Point end_position, Point previouse_ant_position){      //simulates ant movement, return true if ant has reached food source
+    public boolean simulate(Point end_position, Point previouse_ant_position, Obstackle terrain){      //simulates ant movement, return true if ant has reached food source
 
         if(this.position.X_pos()  >= (end_position.X_pos()-2) &&
         this.position.X_pos()  <= (end_position.X_pos()+2) &&
@@ -28,8 +28,11 @@ public class Ant_worker extends Ant{
             return true;
         }
 
-        x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
-        y = Math.round(y * (4 / distance));
+        x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        y = Math.round(y * (10 / distance));
+
+        if(check_collision(x, y, terrain))
+            System.out.println("git");
 
         this.position.change_coordinates(x, y);               //changes its position
 
