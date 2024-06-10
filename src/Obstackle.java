@@ -13,12 +13,12 @@ public class Obstackle {
         
         for(int i = 0; i < number_of_obstakles; i++){
 
-            int x = random.nextInt(boardWidth - 30) + 15;                                                                     //picks randome position for obstackle
-            int y = random.nextInt(boardHeight - 30) + 15;
+            int x = random.nextInt(boardWidth - 40) + 20;                                                                     //picks randome position for obstackle
+            int y = random.nextInt(boardHeight - 40) + 20;
 
             double o1 = distance(x, y, food_source), o2 = distance(x, y, anthill);
 
-            if(o1 <= 100 || o2 <= 100 || !proximity_check(x, y, 20)){          //checks if this position is not too close to other obstackles, anthill or food source
+            if(o1 <= 75 || o2 <= 75 || !proximity_check(x, y, 20)){          //checks if this position is not too close to other obstackles, anthill or food source
                 continue;
             }
 

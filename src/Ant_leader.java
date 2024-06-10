@@ -102,7 +102,7 @@ public class Ant_leader extends Ant{
 
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
 
-        if(distance < 150){
+        if(distance < 100){
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());

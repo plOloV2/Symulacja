@@ -13,7 +13,7 @@ public class Ant_worker extends Ant{
         if(this.position.X_pos()  >= (end_position.X_pos()-2) &&
         this.position.X_pos()  <= (end_position.X_pos()+2) &&
         this.position.Y_pos()  >= (end_position.Y_pos()-2) &&
-        this.position.Y_pos()  <= (end_position.Y_pos()+2)){ //checks if ant is at food source position
+        this.position.Y_pos()  <= (end_position.Y_pos()+2)){                //checks if ant is at food source position
             setCanSimulate();                                               // if ant is at food source dont draw it
             return true;
         }                                
@@ -29,22 +29,37 @@ public class Ant_worker extends Ant{
             return true;
         }
 
-        x = Math.round(x * (8 / distance));                                 //scales x and y movement to move aproximetly 10 tiles
-        y = Math.round(y * (8 / distance));
+        if(distance > 30){
+            x = Math.round(x * (8 / distance));                                 //scales x and y movement to move aproximetly 8 tiles
+            y = Math.round(y * (8 / distance));
+        }
+        else{
+            x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 4 tiles
+            y = Math.round(y * (4 / distance));
+        }
+
+        int iter = 0;
 
         while(!check_collision(x, y, terrain)){
             Random random = new Random();
+            iter += 2;
 
-            x = random.nextInt(40)+position.X_pos() - 20;
-            y = random.nextInt(40)+position.Y_pos() - 20;
+            x = random.nextInt(iter*2)+previouse_ant_position.X_pos() - iter;
+            y = random.nextInt(iter*2)+previouse_ant_position.Y_pos() - iter;
             
             x -= this.position.X_pos();
             y -= this.position.Y_pos();
     
             distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
     
-            x = Math.round(x * (8 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
-            y = Math.round(y * (8 / distance));            
+            if(distance > 30){
+                x = Math.round(x * (8 / distance));                                 //scales x and y movement to move aproximetly 8 tiles
+                y = Math.round(y * (8 / distance));
+            }
+            else{
+                x = Math.round(x * (4 / distance));                                 //scales x and y movement to move aproximetly 4 tiles
+                y = Math.round(y * (4 / distance));
+            }          
         }
 
         this.position.change_coordinates(x, y);               //changes ants position
