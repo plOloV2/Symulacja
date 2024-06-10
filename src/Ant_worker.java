@@ -1,11 +1,12 @@
-import java.awt.Graphics;
+import java.awt.Color;
 import java.lang.Math;
 import java.util.Random;
 public class Ant_worker extends Ant{
 
-    public Ant_worker(Point start){
-        super(start);
+    public Ant_worker(Point start, Color color){
+        super(start, color);
     }
+
     Point last_position;
 
     public boolean simulate(Point end_position, Point previouse_ant_position, Obstackle terrain){      //simulates ant movement, return true if ant has reached food source                              
@@ -61,6 +62,7 @@ public class Ant_worker extends Ant{
         return false;
     }
     
-    public void draw1(Graphics g){
-    }
+
+
+
 }

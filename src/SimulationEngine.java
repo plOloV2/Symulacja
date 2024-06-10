@@ -15,6 +15,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private int boardWidth;
 
     private int max_number_of_ants;     //min 10
+    private int number_of_lines;     //values: 1-5
     private boolean end = false;        //ends simulation
     private int tick = 0;               //counts how smany ticks passed since last ant was created
     private int leader_angle;           //describes max angle or leaders path change
@@ -23,6 +24,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     private Image ant_hillImage;
     private Image food_sourceImage;
+
+    private int colorChange;            //for changing lines colors
     
 
     //objects
@@ -32,10 +35,9 @@ public class SimulationEngine extends JPanel implements ActionListener {
     private ArrayList<Ant_worker> workers;
 
     // simulation logic
-    Timer simulationLoop;
-    int tickDistance = 0;
-    int lastTick = 0;
-    int time = 0; // for "time" measurement
+    private Timer simulationLoop;
+    private int tickDistance = 0;
+    private int lastTick = 0;
 
 
     SimulationEngine(int boardWidth, int boardHeight){
@@ -81,10 +83,13 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
         }
         if(workers != null){
+            double lineNum = ((double)(max_number_of_ants)/(double)number_of_lines);
+            double tLineNum = lineNum;
             for(int i = 0; i < workers.size(); i++){
                 workers.get(i).draw(g);
-                if(i == (max_number_of_ants-1)){
+                if((i+1) == (int)Math.round(tLineNum) ){
                     workers.get(i).draw1(g);
+                    tLineNum += lineNum;
                 }
             }
         }
@@ -114,12 +119,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
             lastTick = 0;
             tickDistance = 0;
             if(workers != null){    //gdy tablica mrówek nie jest pusta to dodaje chodzi o to ze inaczej nie mozna uzyc workers.size()
-                if(workers.size() < (max_number_of_ants-1)){
-                    workers.add(new Ant_worker(anthill)); // dodaje mrówke
+                if(workers.size() < max_number_of_ants){
+                    int colorNum = 215 - (workers.size()+1)*colorChange;
+                    workers.add(new Ant_worker(anthill, new Color(colorNum,colorNum,colorNum))); // dodaje mrówke
                 }
-                else if(workers.size() == (max_number_of_ants-1)){
-                    workers.add(new LastWorker(anthill));
-                }
+                    
             }
         }
         tickDistance++;
@@ -138,29 +142,37 @@ public class SimulationEngine extends JPanel implements ActionListener {
         if(antLeader != null){
             antLeader.simulate(food_source, terrain);
         }
-        
+
         simulationLoop.setDelay(1000-tick);
 
         if(end)
+        {
             System.out.println("Koniec"); //ostatnia mrówka jest u celu
-
+            simulationLoop.stop();
+        }
+            
         repaint();
 
     }
+    
 
 
     public void set_tick(int tick){
         this.tick = tick;
     }
     public void set_number_of_ants(int number_of_ants){
-        this.max_number_of_ants = number_of_ants;    
+        this.max_number_of_ants = number_of_ants;  
+        this.colorChange = (int)Math.round(105/(number_of_ants+1));  
+    }
+    public void set_number_of_lines(int number_of_lines){
+        this.number_of_lines = number_of_lines;    
     }
     public void set_leader_angle(int leader_angle){
         this.leader_angle = leader_angle;
     }
     public void set_antHill(int x, int y){
         anthill = new Point(x, y);
-        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth);
+        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth, Color.white);
     }
     public void set_foodSource(int x, int y){
         food_source = new Point(x,y);

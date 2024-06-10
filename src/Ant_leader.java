@@ -1,6 +1,4 @@
 import java.awt.Color;
-import java.awt.Graphics;
-import java.util.ArrayList;
 import java.util.Random;
 
 public class Ant_leader extends Ant{
@@ -14,18 +12,15 @@ public class Ant_leader extends Ant{
     private int boardWidth;
     private int counter = 0;                                    //every 3 move leader goes towards food_source
     
-    private ArrayList<Point> line;                              //lista przechowująca linie
 
     
-    public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth){
-        super(start);
+    public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth, Color color){
+        super(start, color);
         this.leader_angle = leader_angle_value/2;
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         this.last_position = new Point(start.X_pos(), start.Y_pos());
         
-
-        line = new ArrayList<>();
     }
     
     private boolean angle_check(int x, int y){                      //this function checks if provided vector(x,y) makes smaller angle beetwen last_position vector than leader_angle
@@ -170,12 +165,5 @@ public class Ant_leader extends Ant{
         return false;
     }
 
-    public void draw1(Graphics g){  //metoda do rysowania lini mozna ja pozniej wrzucic w ant
-        g.setColor(Color.RED);  
-        line.add(new Point(position.X_pos(),position.Y_pos()));
-        for(int i = 1; i < line.size(); i++){
-            g.drawLine(line.get(i).X_pos(), line.get(i).Y_pos(), line.get(i-1).X_pos(), line.get(i-1).Y_pos());
-        }
-        
-    }
+
 }

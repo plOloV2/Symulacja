@@ -55,10 +55,12 @@ public class Board extends JFrame{
         panel1.add(name1);
         panel1.add(name2);
         panel1.add(name3);
+        panel1.add(name4);
 
         name1.setHorizontalAlignment(SwingConstants.CENTER);
         name2.setHorizontalAlignment(SwingConstants.CENTER);
         name3.setHorizontalAlignment(SwingConstants.CENTER);
+        name4.setHorizontalAlignment(SwingConstants.CENTER);
 
         panel1.setSize(boardWidth, 50);
         panel1.setLayout(new GridLayout());   
@@ -67,6 +69,7 @@ public class Board extends JFrame{
         panel2.add(sliderTicks);
         panel2.add(sliderNumOfAnts);
         panel2.add(sliderLeadAngle);
+        panel2.add(sliderNumOfLines);
         
         panel2.setSize(boardWidth, 50);
         panel2.setLayout(new GridLayout());
@@ -75,10 +78,12 @@ public class Board extends JFrame{
         panel3.add(text1);
         panel3.add(text2);
         panel3.add(text3);
+        panel3.add(text4);
 
         text1.setHorizontalAlignment(SwingConstants.CENTER);
         text2.setHorizontalAlignment(SwingConstants.CENTER);
         text3.setHorizontalAlignment(SwingConstants.CENTER);
+        text4.setHorizontalAlignment(SwingConstants.CENTER);
 
         panel3.setSize(boardWidth, 50);
         panel3.setLayout(new GridLayout());
@@ -107,10 +112,12 @@ public class Board extends JFrame{
                             simulationEngine.set_number_of_ants(sliderNumOfAnts.getValue());
                             simulationEngine.set_leader_angle(sliderLeadAngle.getValue());
                             simulationEngine.set_antHill(antHillX, antHillY);
+                            simulationEngine.set_number_of_lines(sliderNumOfLines.getValue());
                             simulationEngine.set_foodSource(foodSourceX, foodSourceY);
                             button.setEnabled(false);
                             sliderNumOfAnts.setEnabled(false);
                             sliderLeadAngle.setEnabled(false);
+                            sliderNumOfLines.setEnabled(false);
                             coordinatesAntHillX.setEnabled(false);
                             coordinatesAntHillY.setEnabled(false);
                             coordinatesFoodSourceX.setEnabled(false);
@@ -133,10 +140,10 @@ public class Board extends JFrame{
         getSliderValueTick(sliderTicks,text1,simulationEngine);
         getSliderValue(sliderNumOfAnts,text2);
         getSliderValue(sliderLeadAngle,text3);
+        getSliderValue(sliderNumOfLines,text4);
     }
 
     private SimulationEngine simulationEngine;
-    private int value;
 
     private int boardHeight;
     private int boardWidth;
@@ -145,9 +152,6 @@ public class Board extends JFrame{
     private Integer antHillY = 400;
     private Integer foodSourceX = 50;
     private Integer foodSourceY = 400;
-
-    private int number_of_ants = 0;
-    private int leader_angle = 0;
     
 
     private JButton button = new JButton("Start");
@@ -166,18 +170,21 @@ public class Board extends JFrame{
 
 
     
-    private JSlider sliderTicks = new JSlider(JSlider.HORIZONTAL, 0, 1000, 500);
+    private JSlider sliderTicks = new JSlider(JSlider.HORIZONTAL, 600, 1000, 800);
     private JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 10, 100, 45);
     private JSlider sliderLeadAngle = new JSlider(JSlider.HORIZONTAL, 15, 90, 60);
+    private JSlider sliderNumOfLines = new JSlider(JSlider.HORIZONTAL, 1, 5, 1);
 
 
-    private JLabel text1 = new JLabel("500");
+    private JLabel text1 = new JLabel("800");
     private JLabel text2 = new JLabel("45");
     private JLabel text3 = new JLabel("60");
+    private JLabel text4 = new JLabel("1");
 
     private JLabel name1 = new JLabel("Ticks");
     private JLabel name2 = new JLabel("num. of ants");
     private JLabel name3 = new JLabel("Leader wiggle angle");
+    private JLabel name4 = new JLabel("num. of lines");
 
 
 

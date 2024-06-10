@@ -1,7 +1,9 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.PriorityQueue;
 
@@ -18,18 +20,25 @@ public class Ant {
             this.y2 = y2;
         }
     }
-    protected Point position;               //current position of ant
-    private BufferedImage antImage;
-    private boolean canSimulate = true;
 
-    public Ant(Point start){
+    public Ant(Point start,Color color){
         this.position = new Point(start.X_pos(), start.Y_pos());
+        line = new ArrayList<>();
+        this.color = color;
         try {
             antImage = ImageIO.read(new File("images/ant.png"));
         } catch (IOException ex) {
             System.out.println("Brak ant.png");
         }
     }
+
+    protected Point position;               //current position of ant
+    private BufferedImage antImage;
+    private boolean canSimulate = true;
+    private ArrayList<Point> line;                      //lista przechowująca linie
+
+    //for line painting
+    private Color color;
 
     public Point current_position(){        //return currnet position
         return position;
@@ -44,6 +53,15 @@ public class Ant {
             g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
         }
            
+    }
+
+    public void draw1(Graphics g){ 
+        g.setColor(color);  
+        line.add(new Point(position.X_pos(),position.Y_pos()));
+        for(int i = 1; i < line.size(); i++){
+            g.drawLine(line.get(i).X_pos(), line.get(i).Y_pos(), line.get(i-1).X_pos(), line.get(i-1).Y_pos());
+        }
+        
     }
 
     protected boolean check_collision(int x, int y, Obstackle terrain){
@@ -103,6 +121,7 @@ public class Ant {
     private boolean isValid(int x, int y, int x_kon, int y_kon) {
         return (x >= 0) && (x < x_kon) && (y >= 0) && (y < y_kon);
     }
+
 
     private class Cell {
         int x, y;
