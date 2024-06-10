@@ -119,22 +119,53 @@ public class Ant_leader extends Ant{
     
                 counter = 1;
             }
-        } 
+        }
        
         x -= this.position.X_pos();
         y -= this.position.Y_pos();
 
-        distance = (float)Math.sqrt(x*x+y*y);                               //calculates distance etwen its position and previos ant position
+        distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
+        x = Math.round(x * (10 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
         y = Math.round(y * (10 / distance));
 
-        if(!check_collision(x, y, terrain))
-            System.out.println("nie git");
+        while(!check_collision(x, y, terrain)){
+            x = random.nextInt(40)+position.X_pos() - 20;
+            y = random.nextInt(40)+position.Y_pos() - 20;
+
+            if(x > (boardWidth - 10)){
+                x = end.X_pos();
+                angle_change = true;
+            }
+
+            if(y > (boardHeight - 10)){
+                y = end.Y_pos();
+                angle_change = true;
+            }
+                
+            if(x < 10){
+                x = end.X_pos();
+                angle_change = true;
+            }
+                
+            if(y < 10){
+                y = end.Y_pos();
+                angle_change = true;
+            }
+            
+            x -= this.position.X_pos();
+            y -= this.position.Y_pos();
+    
+            distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
+    
+            x = Math.round(x * (10 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
+            y = Math.round(y * (10 / distance));            
+        }
+        
         
         last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());
 
-        this.position.change_coordinates(x, y);                             //changes its position
+        this.position.change_coordinates(x, y);                             //changes ants position
 
         return false;
     }
