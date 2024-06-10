@@ -31,9 +31,6 @@ public class Ant_worker extends Ant{
         x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
         y = Math.round(y * (10 / distance));
 
-        if(check_collision(x, y, terrain))
-            System.out.println("git");
-
         this.position.change_coordinates(x, y);               //changes its position
 
         last_position = position;

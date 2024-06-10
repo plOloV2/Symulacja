@@ -102,7 +102,7 @@ public class Ant_leader extends Ant{
 
         float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
 
-        if(distance < 100){
+        if(distance < 150){
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
@@ -129,8 +129,8 @@ public class Ant_leader extends Ant{
         x = Math.round(x * (10 / distance));                                 //scales x and y movement to move aproximetly 2 tiles
         y = Math.round(y * (10 / distance));
 
-        if(check_collision(x, y, terrain))
-            System.out.println("git");
+        if(!check_collision(x, y, terrain))
+            System.out.println("nie git");
         
         last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());
 

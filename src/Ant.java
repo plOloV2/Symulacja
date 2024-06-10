@@ -2,10 +2,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
 
 import javax.imageio.ImageIO;
@@ -51,30 +48,44 @@ public class Ant {
 
     protected boolean check_collision(int x, int y, Obstackle terrain){
 
+        if(x > 0)
+            x++;
+        else
+            x--;
+        
+        if(y > 0)
+            y++;
+        else
+            y--;
+
         boolean[][]move_board = new boolean[Math.abs(x)][Math.abs(y)];
 
         for(int i = 0; i != x; i += x/Math.abs(x))
             for(int j = 0; j != y; j += y/Math.abs(y))
                 move_board[Math.abs(i)][Math.abs(j)] = terrain.check_position(new Point(this.position.X_pos() + i, this.position.Y_pos() + j));
 
+        x = Math.abs(x);
+        y = Math.abs(y);
         
         PriorityQueue<Cell> openSet = new PriorityQueue<>(Comparator.comparingInt(a -> a.heuristic));
         openSet.add(new Cell(0, 0, heuristic(0, 0, x, y)));
-        int[] rowNum = {-1, 0, 0, 1};
-        int[] colNum = {0, -1, 1, 0};
+        int[] x_num = {-1, 0, 0, 1};
+        int[] y_num = {0, -1, 1, 0};
 
         while (!openSet.isEmpty()) {
             Cell current = openSet.poll();
 
-            if (current.x == x && current.y == y) 
+            if (current.x == x-1 && current.y == y-1) 
                 return true;            // Path found
-            
 
+            if (move_board[Math.abs(current.x)][Math.abs(current.y)])
+                continue;
+            
             move_board[Math.abs(current.x)][Math.abs(current.y)] = true;
 
             for (int i = 0; i < 4; i++) {
-                int new_x = current.x + rowNum[i];
-                int new_y = current.y + colNum[i];
+                int new_x = current.x + x_num[i];
+                int new_y = current.y + y_num[i];
 
                 if (isValid(new_x, new_y, x, y) && !move_board[new_x][new_y]) {
                     Cell neighbor = new Cell(new_x, new_y, heuristic(new_x, new_y, x, y));
