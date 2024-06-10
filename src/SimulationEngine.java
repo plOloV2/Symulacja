@@ -88,7 +88,15 @@ public class SimulationEngine extends JPanel implements ActionListener {
             for(int i = 0; i < workers.size(); i++){
                 workers.get(i).draw(g);
                 if((i+1) == (int)Math.round(tLineNum) ){
-                    workers.get(i).draw1(g);
+                    if(!end){
+                        workers.get(i).draw1(g);
+                    }
+                    else{
+                        if((i+1)==max_number_of_ants){
+                            workers.get(i).draw1(g);
+                        }
+                    }
+                    
                     tLineNum += lineNum;
                 }
             }
@@ -162,7 +170,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
     public void set_number_of_ants(int number_of_ants){
         this.max_number_of_ants = number_of_ants;  
-        this.colorChange = (int)Math.round(105/(number_of_ants+1));  
+        this.colorChange = (int)Math.round(205/(number_of_ants+1));  
     }
     public void set_number_of_lines(int number_of_lines){
         this.number_of_lines = number_of_lines;    
