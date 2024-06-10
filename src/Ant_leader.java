@@ -126,8 +126,8 @@ public class Ant_leader extends Ant{
 
         distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
 
-        x = Math.round(x * (10 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
-        y = Math.round(y * (10 / distance));
+        x = Math.round(x * (8 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
+        y = Math.round(y * (8 / distance));
 
         while(!check_collision(x, y, terrain)){
             x = random.nextInt(40)+position.X_pos() - 20;
@@ -158,8 +158,8 @@ public class Ant_leader extends Ant{
     
             distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
     
-            x = Math.round(x * (10 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
-            y = Math.round(y * (10 / distance));            
+            x = Math.round(x * (8 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
+            y = Math.round(y * (8 / distance));            
         }
         
         

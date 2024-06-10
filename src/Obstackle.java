@@ -13,8 +13,8 @@ public class Obstackle {
         
         for(int i = 0; i < number_of_obstakles; i++){
 
-            int x = random.nextInt(boardWidth - 20) + 10;                                                                     //picks randome position for obstackle
-            int y = random.nextInt(boardHeight - 20) + 10;
+            int x = random.nextInt(boardWidth - 30) + 15;                                                                     //picks randome position for obstackle
+            int y = random.nextInt(boardHeight - 30) + 15;
 
             double o1 = distance(x, y, food_source), o2 = distance(x, y, anthill);
 
