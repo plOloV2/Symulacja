@@ -1,8 +1,10 @@
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -28,6 +30,7 @@ public class Board extends JFrame{
     private void initComponents(){
 
         //setting board properties
+        this.setIconImage(new ImageIcon("images/ant.png").getImage());
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(boardWidth, boardHeight+(Const.singlePanelHeight*3));
         this.setResizable(false);
@@ -35,7 +38,7 @@ public class Board extends JFrame{
         this.add(simulationEngine, BorderLayout.NORTH);
         this.add(panel, BorderLayout.SOUTH);
         this.setVisible(true);
-
+        
         //adding to specific panels their components
         panel.setLayout(new GridLayout(4,1));
         panel.add(panel0);
