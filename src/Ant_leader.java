@@ -3,17 +3,14 @@ import java.util.Random;
 
 public class Ant_leader extends Ant{
     
-
-    // randomizer 
     private Random random = new Random();
     private int leader_angle;                                   //angle at whitch leader can change direction
     private Point last_position;                                //previouse leader direction
     private int boardHeight;                                    //board boudaries
     private int boardWidth;
-    private int counter = 0;                                    //every 3 move leader goes towards food_source
+    private int counter = 0;                                    //every 5 move, if closer than 100 units, leader goes towards food_source
     
 
-    
     public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth, Color color){
         super(start, color);
         this.leader_angle = leader_angle_value/2;
@@ -25,32 +22,29 @@ public class Ant_leader extends Ant{
     
     private boolean angle_check(int x, int y){                      //this function checks if provided vector(x,y) makes smaller angle beetwen last_position vector than leader_angle
 
-        if(last_position.X_pos() == this.position.X_pos() && last_position.Y_pos() == this.position.Y_pos())
+        if(last_position.X_pos() == this.position.X_pos() && last_position.Y_pos() == this.position.Y_pos())    //if given same two points, retun true
             return true;
-
-        
 
         double a, b, c, d;
         int x1, y1, x2, y2;
 
-        x1 = this.position.X_pos() - last_position.X_pos();
+        x1 = this.position.X_pos() - last_position.X_pos();                                         //calculates two vectors, from previouse to cuurent position and from current to (x,y)
         y1 = this.position.Y_pos() - last_position.Y_pos();
         x2 = x - this.position.X_pos();
         y2 = y - this.position.Y_pos();
 
-        a = x1 * x2 + y1 * y2;
+        a = x1 * x2 + y1 * y2;                                                                      //calculates cos value of angle betwen vectors
         b = Math.sqrt(x1*x1 + y1*y1);
         c = Math.sqrt(x2*x2 + y2*y2);
 
         d = a/(b*c);
 
-        d = Math.toDegrees(Math.acos(d));
+        d = Math.toDegrees(Math.acos(d));                                                           //gets result in deegres from acos() function
         
-        if(d <= leader_angle || 360-d <= leader_angle)
+        if(d <= leader_angle || 360-d <= leader_angle)                                              //if calculated angle is smaller than leader_angle returns true
             return true;
-        
             
-        return false;
+        return false;                                                                               //else returns false
     }
 
     public boolean simulate(Point end, Obstackle terrain){                                          //simulates ant movement, return true if ant has reached food source
