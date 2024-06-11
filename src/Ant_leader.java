@@ -53,7 +53,7 @@ public class Ant_leader extends Ant{
         return false;
     }
 
-    public boolean simulate(Point end, Obstackle terrain){                                                             //simulates ant movement, return true if ant has reached food source
+    public boolean simulate(Point end, Obstackle terrain){                                          //simulates ant movement, return true if ant has reached food source
         
         if(this.position.X_pos()  == end.X_pos() && this.position.Y_pos() == end.Y_pos())           //checks if ant is at food source position
             return true;
@@ -61,109 +61,102 @@ public class Ant_leader extends Ant{
         
         int x = end.X_pos(), y = end.X_pos();
 
-        if(counter == 0){
+        if(counter == 0){                                                                           //if leader has not yet moved, it first move will be in food_source direction
             x = end.X_pos();
             y = end.Y_pos();
             counter ++;
         }
+        else{
+            boolean angle_change = false;
+            do{                                                                                     //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
-        boolean angle_change = false;
-        do{                                                                                         //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
+                x = random.nextInt(40)+position.X_pos() - 20;
+                y = random.nextInt(40)+position.Y_pos() - 20;
 
-            x = random.nextInt(40)+position.X_pos() - 20;
-            y = random.nextInt(40)+position.Y_pos() - 20;
+                if(x > (boardWidth - 10)){                                                          //if x or y are out of board boundaries - 10 (minus 10 for extra safety), switch them to food_source respective value and end while loop
+                    x = end.X_pos();
+                    angle_change = true;
+                }
 
-            if(x > (boardWidth - 10)){
-                x = end.X_pos();
-                angle_change = true;
-            }
-
-            if(y > (boardHeight - 10)){
-                y = end.Y_pos();
-                angle_change = true;
-            }
+                if(y > (boardHeight - 10)){
+                    y = end.Y_pos();
+                    angle_change = true;
+                }
+                    
+                if(x < 10){
+                    x = end.X_pos();
+                    angle_change = true;
+                }
+                    
+                if(y < 10){
+                    y = end.Y_pos();
+                    angle_change = true;
+                }
                 
-            if(x < 10){
-                x = end.X_pos();
-                angle_change = true;
-            }
-                
-            if(y < 10){
-                y = end.Y_pos();
-                angle_change = true;
-            }
-            
-        }while(!angle_check(x, y) && !angle_change);
+            }while(!angle_check(x, y) && !angle_change);
+        }
 
-        float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));
+        float distance = (float)Math.sqrt((this.position.X_pos()-end.X_pos())*(this.position.X_pos()-end.X_pos())+(this.position.Y_pos()-end.Y_pos())*(this.position.Y_pos()-end.Y_pos()));     //leader distance from food
 
-        if(distance < 100){
+        if(distance < 100){                                                         //if distance is less than 100, leader can "smell" food, so every 5 move will be in food direction
 
             if(distance <= 10){
                 this.position.new_coordinates(end.X_pos(), end.Y_pos());
-                setCanSimulate();                                               // if ant is at food source dont draw it
+                setCanSimulate();                                                   // if ant is at food source dont draw it
                 return true;
             }
-
-            counter++;
             
-            if(counter >= 5){
+            if(counter >= 5){                                                       //every 5 move in food direction
     
                 x = end.X_pos();
                 y = end.Y_pos();
     
                 counter = 1;
             }
+
+            counter++;
         }
        
-        x -= this.position.X_pos();
+        x -= this.position.X_pos();                                                 //calculates vector from current position to (x,y)
         y -= this.position.Y_pos();
 
-        distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
+        distance = (float)Math.sqrt(x*x+y*y);                                       //calculates lenght of vector
 
-        x = Math.round(x * (8 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
+        x = Math.round(x * (8 / distance));                                         //scales x and y movement to move aproximetly 8 tiles
         y = Math.round(y * (8 / distance));
 
-        while(!check_collision(x, y, terrain)){
-            x = random.nextInt(40)+position.X_pos() - 20;
+        while(!check_collision(x, y, terrain)){                                     //if calculated movement results in collision with terrain, this while loop will be executed
+
+            x = random.nextInt(40)+position.X_pos() - 20;                           //chosing random (x,y) point
             y = random.nextInt(40)+position.Y_pos() - 20;
 
             if(x > (boardWidth - Const.mapPadding)){
                 x = end.X_pos();
-                angle_change = true;
-            }
 
             if(y > (boardHeight - Const.mapPadding)){
                 y = end.Y_pos();
-                angle_change = true;
-            }
                 
             if(x < Const.mapPadding){
                 x = end.X_pos();
-                angle_change = true;
-            }
                 
             if(y < Const.mapPadding){
                 y = end.Y_pos();
-                angle_change = true;
-            }
             
-            x -= this.position.X_pos();
+            x -= this.position.X_pos();                                             //calculates vector from current position to (x,y)
             y -= this.position.Y_pos();
     
-            distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
+            distance = (float)Math.sqrt(x*x+y*y);                                   //calculates lenght of vector
     
-            x = Math.round(x * (8 / distance));                                    //scales x and y movement to move aproximetly 10 tiles
+            x = Math.round(x * (8 / distance));                                     //scales x and y movement to move aproximetly 8 tiles
             y = Math.round(y * (8 / distance));            
         }
         
         
-        last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());
+        last_position.new_coordinates(this.position.X_pos(), this.position.Y_pos());    //previose position becomes current position
 
-        this.position.change_coordinates(x, y);                             //changes ants position
+        this.position.change_coordinates(x, y);                                     //current position gets changed by <x,y> vector
 
         return false;
     }
-
 
 }
