@@ -18,8 +18,9 @@ public class Obstackle {
 
             double o1 = distance(x, y, food_source), o2 = distance(x, y, anthill);
 
-            if(o1 <= 75 || o2 <= 75 || !proximity_check(x, y, 20)){          //checks if this position is not too close to other obstackles, anthill or food source
-                continue;
+            if(o1 <= 75 || o2 <= 75 || !proximity_check(x, y, 20)){                 //checks if this position is not too close to other obstackles, anthill or food source
+                i--;
+                continue;                                                                    //if it is, skips rest of loop and tries one more time
             }
 
             occupied.add(new Point(x, y));                                                                          //if its not, marks given point as blocked
@@ -89,7 +90,7 @@ public class Obstackle {
  
     }
 
-    public void draw(Graphics g){
+    public void draw(Graphics g){                                   //draws all obstackles to the board
         g.setColor(Color.gray);
         if(occupied != null){
             for(int i = 0; i < occupied.size(); i++){
