@@ -130,16 +130,16 @@ public class Ant_leader extends Ant{
             x = random.nextInt(40)+position.X_pos() - 20;                           //chosing random (x,y) point
             y = random.nextInt(40)+position.Y_pos() - 20;
 
-            if(x > (boardWidth - Const.mapPadding)){
+            if(x > (boardWidth - Const.mapPadding))
                 x = end.X_pos();
 
-            if(y > (boardHeight - Const.mapPadding)){
+            if(y > (boardHeight - Const.mapPadding))
                 y = end.Y_pos();
                 
-            if(x < Const.mapPadding){
+            if(x < Const.mapPadding)
                 x = end.X_pos();
                 
-            if(y < Const.mapPadding){
+            if(y < Const.mapPadding)
                 y = end.Y_pos();
             
             x -= this.position.X_pos();                                             //calculates vector from current position to (x,y)
