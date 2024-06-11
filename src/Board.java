@@ -27,6 +27,7 @@ public class Board extends JFrame{
 
     private void initComponents(){
 
+        //setting board properties
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(boardWidth, boardHeight+(Const.singlePanelHeight*3));
         this.setResizable(false);
@@ -35,6 +36,7 @@ public class Board extends JFrame{
         this.add(panel, BorderLayout.SOUTH);
         this.setVisible(true);
 
+        //adding to specific panels their components
         panel.setLayout(new GridLayout(4,1));
         panel.add(panel0);
         panel.add(panel1);
@@ -90,33 +92,34 @@ public class Board extends JFrame{
 
         setSliders();
         applyChanges();
-        //this.pack();
     }
 
 
     private void applyChanges(){
 
-        button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {                                                             //adding action listener to button
             @Override
             public void actionPerformed(ActionEvent e) {
-                    try {
+                    try {                                                                                           //exception for passed coordinates
                         antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(Const.numOfLettersToCut1));
                         antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(Const.numOfLettersToCut1));
                         foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(Const.numOfLettersToCut2));
                         foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(Const.numOfLettersToCut2));
 
-                        if( antHillX < Const.lowestCoord || antHillY < Const.lowestCoord || 
+                        if( antHillX < Const.lowestCoord || antHillY < Const.lowestCoord ||                         //checking if passed coordinates are correct
                             antHillX > Const.highestCoord || antHillY > Const.highestCoord || 
                             foodSourceX < Const.lowestCoord || foodSourceY < Const.lowestCoord || 
                             foodSourceX > Const.highestCoord || foodSourceY > Const.highestCoord)
                             JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 30 and lesser than 450");
                     
                         else{
+                            //calling setters from simulationEngine
                             simulationEngine.set_number_of_ants(sliderNumOfAnts.getValue());
                             simulationEngine.set_leader_angle(sliderLeadAngle.getValue());
                             simulationEngine.set_antHill(antHillX, antHillY);
                             simulationEngine.set_number_of_lines(sliderNumOfLines.getValue());
                             simulationEngine.set_foodSource(foodSourceX, foodSourceY);
+                            //disabling components 
                             button.setEnabled(false);
                             sliderNumOfAnts.setEnabled(false);
                             sliderLeadAngle.setEnabled(false);
@@ -126,8 +129,8 @@ public class Board extends JFrame{
                             coordinatesFoodSourceX.setEnabled(false);
                             coordinatesFoodSourceY.setEnabled(false);
                         }
-                    } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");         // popup dialog window
+                    } catch (NumberFormatException ex) {                                                            
+                        JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");             //popup dialog window
 
                         System.out.println("Niepoprawny format liczby "+coordinatesAntHillX.getText());
                         System.out.println("Niepoprawny format liczby "+coordinatesAntHillY.getText());
@@ -139,51 +142,54 @@ public class Board extends JFrame{
         
     }
 
-    private void setSliders(){
+    private void setSliders(){                                                                              //method for adding listeners                                                                  
         getSliderValueTick(sliderTicks,text1,simulationEngine);
         getSliderValue(sliderNumOfAnts,text2);
         getSliderValue(sliderLeadAngle,text3);
         getSliderValue(sliderNumOfLines,text4);
     }
-
-    private SimulationEngine simulationEngine;
-
+    //board properties
     private int boardHeight;
     private int boardWidth;
 
-    private Integer antHillX;
-    private Integer antHillY;
-    private Integer foodSourceX;
-    private Integer foodSourceY;
     
+    private SimulationEngine simulationEngine;
 
+    //coordinatesof anthill and food source
+    private int antHillX;       
+    private int antHillY;
+    private int foodSourceX;
+    private int foodSourceY;
+    
+    //creating button that starts simulation
     private JButton button = new JButton("Start");
 
+    //creating text fields to write coordinates in
     private JTextField coordinatesAntHillX = new JTextField("Anthill X = ");
     private JTextField coordinatesAntHillY = new JTextField("Anthill Y = ");
     private JTextField coordinatesFoodSourceX = new JTextField("Food X = ");
     private JTextField coordinatesFoodSourceY = new JTextField("Food Y = ");
 
+    //creating all panels
     private JPanel panel = new JPanel();
-
     private JPanel panel0 = new JPanel();
     private JPanel panel1 = new JPanel();
     private JPanel panel2 = new JPanel();
     private JPanel panel3 = new JPanel();
 
-
-    
+    //creating sliders and giving them values
     private JSlider sliderTicks = new JSlider(JSlider.HORIZONTAL, 600, 1000, 800);
     private JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 10, 40, 25);
     private JSlider sliderLeadAngle = new JSlider(JSlider.HORIZONTAL, 15, 90, 60);
     private JSlider sliderNumOfLines = new JSlider(JSlider.HORIZONTAL, 1, 5, 1);
 
-
+    //text for sliders that are updated when sliders values have changed
     private JLabel text1 = new JLabel("800");
     private JLabel text2 = new JLabel("25");
     private JLabel text3 = new JLabel("60");
     private JLabel text4 = new JLabel("1");
 
+    //names for sliders
     private JLabel name1 = new JLabel("Ticks");
     private JLabel name2 = new JLabel("num. of ants");
     private JLabel name3 = new JLabel("Leader wiggle angle");
@@ -192,7 +198,7 @@ public class Board extends JFrame{
 
 
 
-    public static void getSliderValue(JSlider slider, JLabel text){
+    public static void getSliderValue(JSlider slider, JLabel text){                                         //method for passing value from slider to text label and adding listeners to slider
         
         slider.addChangeListener(new ChangeListener() {
            
@@ -204,7 +210,7 @@ public class Board extends JFrame{
             
         });
     }
-    public static void getSliderValueTick(JSlider slider, JLabel text, SimulationEngine simulationEngine){
+    public static void getSliderValueTick(JSlider slider, JLabel text, SimulationEngine simulationEngine){  //method for passing value from tickSlider to text label and to, setter from simulationengine and add listener to slider
         
         slider.addChangeListener(new ChangeListener() {
            

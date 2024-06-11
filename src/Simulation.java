@@ -1,8 +1,8 @@
 
 public class Simulation {
     Simulation(){
-        simulationEngine = new SimulationEngine(Const.boardWidth, Const.boardHeight);
-        frame = new Board(Const.boardHeight, Const.boardWidth, "symulacja", simulationEngine);
+        simulationEngine = new SimulationEngine(Const.boardWidth, Const.boardHeight);                   //creating simulationEngine object
+        frame = new Board(Const.boardHeight, Const.boardWidth, "symulacja", simulationEngine);    //creating board object and passing simulationEngine
     }
 
     @SuppressWarnings("unused")

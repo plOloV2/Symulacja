@@ -2,8 +2,9 @@ import java.awt.Color;
 
 public class Const {
     //for Simulation class
-    public static int boardHeight = 500;
-    public static int boardWidth = 500;
+        //board properties
+            public static int boardHeight = 500;
+            public static int boardWidth = 500;
 
     //for Board class
     public static int singlePanelHeight = 50;                               // single panel height for exaple for slider panel height or text panel height
