@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.util.Random;
 
-public class Ant_leader extends Ant{
+public class Ant_leader extends Ant{ 
     
     private Random random = new Random();
     private int leader_angle;                                   //angle at whitch leader can change direction
