@@ -88,15 +88,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
             for(int i = 0; i < workers.size(); i++){
                 workers.get(i).draw(g);
                 if((i+1) == (int)Math.round(tLineNum) ){
-                    if(!end){
-                        workers.get(i).draw1(g);
-                    }
-                    else{
-                        if((i+1)==max_number_of_ants){
-                            workers.get(i).draw1(g);
-                        }
-                    }
-                    
+                    workers.get(i).draw1(g);
                     tLineNum += lineNum;
                 }
             }
