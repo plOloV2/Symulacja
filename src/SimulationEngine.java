@@ -146,15 +146,15 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
         int realTick = 1000-tick;                                   //for changing tick value to relevant variable for setDealy method
         simulationLoop.setDelay(realTick);                             
+     
+        repaint();
 
         if(end)
         {
             System.out.println("Koniec");                                               //ostatnia mrówka jest u celu
-            JOptionPane.showMessageDialog(this, "simulation has ended");          // popup dialog window
             simulationLoop.stop();
+            JOptionPane.showMessageDialog(this, "simulation has ended");          // popup dialog window
         }
-            
-        repaint();
 
     }
     
