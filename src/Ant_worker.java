@@ -7,11 +7,9 @@ public class Ant_worker extends Ant{
         super(start, color);
     }
 
-    Point last_position;
-
     public boolean simulate(Point end_position, Point previouse_ant_position, Obstackle terrain){      //simulates ant movement, return true if ant has reached food source                              
 
-        int x = previouse_ant_position.X_pos() - this.position.X_pos();             //calculates x and y diference betwen its position and previos ant position
+        int x = previouse_ant_position.X_pos() - this.position.X_pos();             //calculates vector betwen its position and previos ant position
         int y = previouse_ant_position.Y_pos() - this.position.Y_pos();
         
         float distance = (float)Math.sqrt(x*x+y*y);                                 //calculates distance betwen its position and previos ant position
@@ -33,17 +31,17 @@ public class Ant_worker extends Ant{
 
         int iter = 0;
 
-        while(!check_collision(x, y, terrain)){
+        while(!check_collision(x, y, terrain)){                                     //if ant cannot move becouse of obstackle this while loop will be executed
             Random random = new Random();
-            iter += 2;
+            iter += 3;                                                              //value, with witch new target position will be calculated 
 
-            x = random.nextInt(iter*2)+previouse_ant_position.X_pos() - iter;
-            y = random.nextInt(iter*2)+previouse_ant_position.Y_pos() - iter;
+            x = random.nextInt(iter*2)+previouse_ant_position.X_pos() - iter;       //x = previouse ant x +/- iter
+            y = random.nextInt(iter*2)+previouse_ant_position.Y_pos() - iter;       //y = previouse ant y +/- iter
             
-            x -= this.position.X_pos();
+            x -= this.position.X_pos();                                             //changes x and y to vector from current location of ant
             y -= this.position.Y_pos();
     
-            distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance etwen its position and previos ant position
+            distance = (float)Math.sqrt(x*x+y*y);                                   //calculates distance betwen its position and previos ant position +/- iter
     
             if(distance > 30){
                 x = Math.round(x * (8 / distance));                                 //if distance to previouse ant is bigger than 30 units, scales x and y movement to move aproximetly 8 tiles
@@ -57,12 +55,7 @@ public class Ant_worker extends Ant{
 
         this.position.change_coordinates(x, y);                                     //changes ants position
 
-        last_position = position;
-
-        return false;
+        return false;                                                               //returns false, becouse ant is not yet at end position
     }
     
-
-
-
 }
