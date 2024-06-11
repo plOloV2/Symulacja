@@ -37,7 +37,6 @@ public class SimulationEngine extends JPanel implements ActionListener {
     // simulation logic
     private Timer simulationLoop;       //dimulation loop
     private int tickDistance = 0;       //for counting loops between adding ants
-    private int lastTick = 0;           //like variable above for counting loops
 
 
 
@@ -116,8 +115,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
         }
 
 
-        if((lastTick+20)<tickDistance){                                                             // counter, every 10 loops add new ant
-            lastTick = 0;
+        if(tickDistance>20){                                                             // counter, every 20 loops add new ant
             tickDistance = 0;
             if(workers != null){                                                                    //  only when workers list isnt empty
                 if(workers.size() < max_number_of_ants){
