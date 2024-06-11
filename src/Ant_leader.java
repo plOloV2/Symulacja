@@ -6,16 +6,12 @@ public class Ant_leader extends Ant{
     private Random random = new Random();
     private int leader_angle;                                   //angle at whitch leader can change direction
     private Point last_position;                                //previouse leader direction
-    private int boardHeight;                                    //board boudaries
-    private int boardWidth;
     private int counter = 0;                                    //every 5 move, if closer than 100 units, leader goes towards food_source
     
 
-    public Ant_leader(Point start, int leader_angle_value, int boardHeight, int boardWidth, Color color){
+    public Ant_leader(Point start, int leader_angle_value, Color color){
         super(start, color);
         this.leader_angle = leader_angle_value/2;
-        this.boardHeight = boardHeight;
-        this.boardWidth = boardWidth;
         this.last_position = new Point(start.X_pos(), start.Y_pos());
         
     }
@@ -64,25 +60,25 @@ public class Ant_leader extends Ant{
             boolean angle_change = false;
             do{                                                                                     //if leader has previosly moved, randomly picks x and y untill vector created by it and last lider move have smaller angle in beetwen than leader_angle
 
-                x = random.nextInt(40)+position.X_pos() - 20;
-                y = random.nextInt(40)+position.Y_pos() - 20;
+                x = random.nextInt(Const.maxRandomDistance*2)+position.X_pos() - Const.maxRandomDistance;       //creates random (x,y) point
+                y = random.nextInt(Const.maxRandomDistance*2)+position.Y_pos() - Const.maxRandomDistance;
 
-                if(x > (boardWidth - 10)){                                                          //if x or y are out of board boundaries - 10 (minus 10 for extra safety), switch them to food_source respective value and end while loop
+                if(x > (Const.boardWidth - Const.mapPadding)){                                                          //if x or y are out of board boundaries - 10 (minus 10 for extra safety), switch them to food_source respective value and end while loop
                     x = end.X_pos();
                     angle_change = true;
                 }
 
-                if(y > (boardHeight - 10)){
+                if(y > (Const.boardHeight - Const.mapPadding)){
                     y = end.Y_pos();
                     angle_change = true;
                 }
                     
-                if(x < 10){
+                if(x < Const.mapPadding){
                     x = end.X_pos();
                     angle_change = true;
                 }
                     
-                if(y < 10){
+                if(y < Const.mapPadding){
                     y = end.Y_pos();
                     angle_change = true;
                 }
@@ -121,13 +117,13 @@ public class Ant_leader extends Ant{
 
         while(!check_collision(x, y, terrain)){                                     //if calculated movement results in collision with terrain, this while loop will be executed
 
-            x = random.nextInt(40)+position.X_pos() - 20;                           //chosing random (x,y) point
-            y = random.nextInt(40)+position.Y_pos() - 20;
+            x = random.nextInt(Const.maxRandomDistance*2)+position.X_pos() - Const.maxRandomDistance;       //creates random (x,y) point
+            y = random.nextInt(Const.maxRandomDistance*2)+position.Y_pos() - Const.maxRandomDistance;
 
-            if(x > (boardWidth - Const.mapPadding))
+            if(x > (Const.boardWidth - Const.mapPadding))
                 x = end.X_pos();
 
-            if(y > (boardHeight - Const.mapPadding))
+            if(y > (Const.boardHeight - Const.mapPadding))
                 y = end.Y_pos();
                 
             if(x < Const.mapPadding)

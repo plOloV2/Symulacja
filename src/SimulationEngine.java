@@ -175,7 +175,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
     public void set_antHill(int x, int y){
         anthill = new Point(x, y);
-        antLeader = new Ant_leader(anthill, leader_angle, boardHeight, boardWidth, Color.white);
+        antLeader = new Ant_leader(anthill, leader_angle, Color.white);
     }
     public void set_foodSource(int x, int y){
         food_source = new Point(x,y);

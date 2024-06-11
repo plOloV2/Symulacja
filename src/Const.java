@@ -14,15 +14,16 @@ public class Const {
     public static int numOfLettersToCut2 = 9;                               // number of letters to cut from text label "anthill" when you type coordinates
 
     //for SimulationEngine class
-    public static Color backgroundcolor = new Color(0,102,0);         //color object for background color numbers matches green color
+    public static Color backgroundcolor = new Color(0,102,0);               //color object for background color numbers matches green color
     public static int startColorNumber = 215;                               // number of first color witch represents grey-white color                                    
     public static int colorRangeNumber = 205;                               // color Range number  
     public static int fSPhotoSpacing = 25;                          
     public static int aHPhotoSpacing = 50;
     
     //for Ant class
-    public static int antPhotoSpacing = 16;                                 // for drawing ant photo at its center  
+    public static int antPhotoSpacing = 16;                                 // for drawing ant photo at its center
+    public static int maxRandomDistance = 20;                               // for creating random directions
     
     //for Ant_Leader class
-    public static int mapPadding = 10;                                      // for keping space away from border                            
+    public static int mapPadding = 10;                                      // for keping space away from border
 }
