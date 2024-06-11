@@ -127,7 +127,7 @@ public class Board extends JFrame{
                             coordinatesFoodSourceY.setEnabled(false);
                         }
                     } catch (NumberFormatException ex) {
-                        JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!"); //nie wywołuje sie
+                        JOptionPane.showMessageDialog(Board.this, "Coordinates are incorect!");         // popup dialog window
 
                         System.out.println("Niepoprawny format liczby "+coordinatesAntHillX.getText());
                         System.out.println("Niepoprawny format liczby "+coordinatesAntHillY.getText());
@@ -174,13 +174,13 @@ public class Board extends JFrame{
 
     
     private JSlider sliderTicks = new JSlider(JSlider.HORIZONTAL, 600, 1000, 800);
-    private JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 10, 100, 45);
+    private JSlider sliderNumOfAnts = new JSlider(JSlider.HORIZONTAL, 10, 40, 25);
     private JSlider sliderLeadAngle = new JSlider(JSlider.HORIZONTAL, 15, 90, 60);
     private JSlider sliderNumOfLines = new JSlider(JSlider.HORIZONTAL, 1, 5, 1);
 
 
     private JLabel text1 = new JLabel("800");
-    private JLabel text2 = new JLabel("45");
+    private JLabel text2 = new JLabel("25");
     private JLabel text3 = new JLabel("60");
     private JLabel text4 = new JLabel("1");
 

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -148,7 +149,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
         if(end)
         {
-            System.out.println("Koniec"); //ostatnia mrówka jest u celu
+            System.out.println("Koniec");                                               //ostatnia mrówka jest u celu
+            JOptionPane.showMessageDialog(this, "simulation has ended");          // popup dialog window
             simulationLoop.stop();
         }
             
