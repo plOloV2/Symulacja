@@ -50,7 +50,7 @@ public class Ant {
 
     public void draw(Graphics g){
         if(canSimulate){
-            g.drawImage(antImage, position.X_pos()-16, position.Y_pos()-16, null);
+            g.drawImage(antImage, position.X_pos()-Const.antPhotoSpacing, position.Y_pos()-Const.antPhotoSpacing, null);
         }
            
     }

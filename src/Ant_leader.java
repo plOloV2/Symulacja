@@ -128,22 +128,22 @@ public class Ant_leader extends Ant{
             x = random.nextInt(40)+position.X_pos() - 20;
             y = random.nextInt(40)+position.Y_pos() - 20;
 
-            if(x > (boardWidth - 10)){
+            if(x > (boardWidth - Const.mapPadding)){
                 x = end.X_pos();
                 angle_change = true;
             }
 
-            if(y > (boardHeight - 10)){
+            if(y > (boardHeight - Const.mapPadding)){
                 y = end.Y_pos();
                 angle_change = true;
             }
                 
-            if(x < 10){
+            if(x < Const.mapPadding){
                 x = end.X_pos();
                 angle_change = true;
             }
                 
-            if(y < 10){
+            if(y < Const.mapPadding){
                 y = end.Y_pos();
                 angle_change = true;
             }

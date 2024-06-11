@@ -28,7 +28,7 @@ public class Board extends JFrame{
     private void initComponents(){
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(boardWidth, boardHeight+150);
+        this.setSize(boardWidth, boardHeight+(Const.singlePanelHeight*3));
         this.setResizable(false);
         this.setLayout(new BorderLayout());
         this.add(simulationEngine, BorderLayout.NORTH);
@@ -41,9 +41,9 @@ public class Board extends JFrame{
         panel.add(panel2);
         panel.add(panel3);
 
-        panel.setSize(boardWidth, 200);
+        panel.setSize(boardWidth, Const.singlePanelHeight*3);
 
-        panel0.setSize(boardWidth, 50);
+        panel0.setSize(boardWidth, Const.singlePanelHeight);
         panel0.setLayout(new GridLayout()); 
         panel0.add(button);
         panel0.add(coordinatesAntHillX);
@@ -62,7 +62,7 @@ public class Board extends JFrame{
         name3.setHorizontalAlignment(SwingConstants.CENTER);
         name4.setHorizontalAlignment(SwingConstants.CENTER);
 
-        panel1.setSize(boardWidth, 50);
+        panel1.setSize(boardWidth, Const.singlePanelHeight);
         panel1.setLayout(new GridLayout());   
 
 
@@ -71,7 +71,7 @@ public class Board extends JFrame{
         panel2.add(sliderLeadAngle);
         panel2.add(sliderNumOfLines);
         
-        panel2.setSize(boardWidth, 50);
+        panel2.setSize(boardWidth, Const.singlePanelHeight);
         panel2.setLayout(new GridLayout());
 
 
@@ -85,7 +85,7 @@ public class Board extends JFrame{
         text3.setHorizontalAlignment(SwingConstants.CENTER);
         text4.setHorizontalAlignment(SwingConstants.CENTER);
 
-        panel3.setSize(boardWidth, 50);
+        panel3.setSize(boardWidth, Const.singlePanelHeight);
         panel3.setLayout(new GridLayout());
 
         setSliders();
@@ -100,13 +100,16 @@ public class Board extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                     try {
-                        antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(12));
-                        antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(12));
-                        foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(9));
-                        foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(9));
+                        antHillX = Integer.parseInt(coordinatesAntHillX.getText().substring(Const.numOfLettersToCut1));
+                        antHillY = Integer.parseInt(coordinatesAntHillY.getText().substring(Const.numOfLettersToCut1));
+                        foodSourceX = Integer.parseInt(coordinatesFoodSourceX.getText().substring(Const.numOfLettersToCut2));
+                        foodSourceY = Integer.parseInt(coordinatesFoodSourceY.getText().substring(Const.numOfLettersToCut2));
 
-                        if( antHillX < 0 || antHillY < 0 || antHillX > 450 || antHillY > 450 || foodSourceX < 0 || foodSourceY < 0 || foodSourceX > 450 || foodSourceY > 450)
-                            JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 0 and lesser than 450");
+                        if( antHillX < Const.lowestCoord || antHillY < Const.lowestCoord || 
+                            antHillX > Const.highestCoord || antHillY > Const.highestCoord || 
+                            foodSourceX < Const.lowestCoord || foodSourceY < Const.lowestCoord || 
+                            foodSourceX > Const.highestCoord || foodSourceY > Const.highestCoord)
+                            JOptionPane.showMessageDialog(Board.this, "Coordinates X and Y must be gater than 30 and lesser than 450");
                     
                         else{
                             simulationEngine.set_number_of_ants(sliderNumOfAnts.getValue());
@@ -148,10 +151,10 @@ public class Board extends JFrame{
     private int boardHeight;
     private int boardWidth;
 
-    private Integer antHillX = 100;
-    private Integer antHillY = 400;
-    private Integer foodSourceX = 50;
-    private Integer foodSourceY = 400;
+    private Integer antHillX;
+    private Integer antHillY;
+    private Integer foodSourceX;
+    private Integer foodSourceY;
     
 
     private JButton button = new JButton("Start");

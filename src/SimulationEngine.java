@@ -44,11 +44,11 @@ public class SimulationEngine extends JPanel implements ActionListener {
         this.boardHeight = boardHeight;
         this.boardWidth = boardWidth;
         setPreferredSize(new Dimension(boardWidth,boardHeight));
-        setBackground(new Color(0,102,0));
+        setBackground(Const.backgroundcolor);
 
         import_images();
 
-        simulationLoop = new Timer(100, this);
+        simulationLoop = new Timer(0, this);
         simulationLoop.start();
     }
 
@@ -71,10 +71,10 @@ public class SimulationEngine extends JPanel implements ActionListener {
 
     public void draw(Graphics g){
         if(anthill != null){
-            g.drawImage(ant_hillImage, anthill.X_pos()-50, anthill.Y_pos()-50, 100, 100, this);
+            g.drawImage(ant_hillImage, anthill.X_pos()-Const.aHPhotoSpacing, anthill.Y_pos()-Const.aHPhotoSpacing, 100, 100, this);
         }
         if(food_source != null){
-            g.drawImage(food_sourceImage, food_source.X_pos()-25, food_source.Y_pos()-25, 50, 50, this);
+            g.drawImage(food_sourceImage, food_source.X_pos()-Const.fSPhotoSpacing, food_source.Y_pos()-Const.fSPhotoSpacing, 50, 50, this);
         }
         if(antLeader != null){
                 antLeader.draw(g);
@@ -120,7 +120,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
             tickDistance = 0;
             if(workers != null){    //gdy tablica mrówek nie jest pusta to dodaje chodzi o to ze inaczej nie mozna uzyc workers.size()
                 if(workers.size() < max_number_of_ants){
-                    int colorNum = 215 - (workers.size()+1)*colorChange;
+                    int colorNum = Const.startColorNumber - (workers.size()+1)*colorChange;
                     workers.add(new Ant_worker(anthill, new Color(colorNum,colorNum,colorNum))); // dodaje mrówke
                 }
                     
@@ -143,7 +143,8 @@ public class SimulationEngine extends JPanel implements ActionListener {
             antLeader.simulate(food_source, terrain);
         }
 
-        simulationLoop.setDelay(1000-tick);
+        int realTick = 1000-tick;                                   //for changing tick value to relevant variable for setDealy method
+        simulationLoop.setDelay(realTick);                             
 
         if(end)
         {
@@ -162,7 +163,7 @@ public class SimulationEngine extends JPanel implements ActionListener {
     }
     public void set_number_of_ants(int number_of_ants){
         this.max_number_of_ants = number_of_ants;  
-        this.colorChange = (int)Math.round(205/(number_of_ants+1));  
+        this.colorChange = (int)Math.round(Const.colorRangeNumber/(number_of_ants+1));  
     }
     public void set_number_of_lines(int number_of_lines){
         this.number_of_lines = number_of_lines;    
